@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <meta name="description" content="一场失败也成功的比赛">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「是非成败转头空」- 我的第一场ACM">
+<meta property="og:url" content="http://yoursite.com/2019/07/28/MyFirstACM/index.html">
+<meta property="og:site_name" content="Cotoliqwq&#39;s Blog">
+<meta property="og:description" content="一场失败也成功的比赛">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-07-28T02:23:41.000Z">
+<meta property="article:modified_time" content="2019-07-29T03:56:42.000Z">
+<meta property="article:author" content="Cotoliqwq">
+<meta property="article:tag" content="灌水区">
+<meta property="article:tag" content="ZROI">
+<meta property="article:tag" content="ACM">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/07/28/MyFirstACM/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>「是非成败转头空」- 我的第一场ACM | Cotoliqwq's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cotoliqwq's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">呜咽, 在风中作陪</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-友链">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/links/" rel="section"><i class="menu-item-icon fa fa-fw fa-link"></i> <br/>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-模板">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/templates/" rel="section"><i class="menu-item-icon fa fa-fw fa-code"></i> <br/>模板</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/28/MyFirstACM/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cotoliqwq"/>
+      <meta itemprop="description" content="我们称之为路的，其实不过是彷徨。"/>
+      <meta itemprop="image" content="/images/qwqwq.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cotoliqwq's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">「是非成败转头空」- 我的第一场ACM
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-28 10:23:41" itemprop="dateCreated datePublished" datetime="2019-07-28T10:23:41+08:00">2019-07-28</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-29 11:56:42" itemprop="dateModified" datetime="2019-07-29T11:56:42+08:00">2019-07-29</time>
+              </span>
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br/>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>一场失败也成功的比赛</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>来到ZR之后就一直期待这场ACM,虽然说之前了解过一些关于ACM的知识,但是自己亲身体验,还是第一次.</p>
+<p>虽然打完之后觉得非常遗憾,但这也是一次非凡的经历</p>
+<h3 id="比赛前"><a href="#比赛前" class="headerlink" title="比赛前"></a>比赛前</h3><p>大家处于欢乐的组队状态~</p>
+<p>zs,RainAir,Logey组成的<code>SD省队观光团</code>,以及春神的个人单挑队被钦定最有可能夺冠的两个队.</p>
+<p>没人要的我和莫名没队的cjc临时组成了双人团,不过在比赛前夜,毛老师为我们临时加上了JS的hrz.</p>
+<h3 id="比赛开始"><a href="#比赛开始" class="headerlink" title="比赛开始"></a>比赛开始</h3><p>cjc和hrz都没用过Linux…….</p>
+<p>勉强先用我电脑开题…..,一人一道,cjc开$A$,我和hrz开$B,C$(<del>后来才知道吃了顺序开题的亏</del>)</p>
+<p>大概在比赛7min的时候就有人切题了,但是我们队一点思路都没有.</p>
+<p>15min+过去了,我们决定先看一眼那些题被A的最多…</p>
+<p>于是发现了F,比较sb的<code>multiset</code>模板,hrz一时脑抽直接一发fhq,结果T了…..</p>
+<p>乖乖写<code>multiset</code>,但是我虽然知道<code>multiset</code>和<code>set</code>的用法差不多,但是还是不太会用.</p>
+<p>最后开了一下挂,大概会写了,cjc仍然在肝A,hrz看E…..</p>
+<p>我在他俩坐在地上思考的时候敲了一发F,但是还是T…….(<del>后来知道出题人卡cout</del>)</p>
+<p>cjc肝不动A了,于是和Hrz一起看E.</p>
+<blockquote>
+<p>cjc: 这直接排个序然后二分不就完了吗?</p>
+</blockquote>
+<p>在cjc把自己hack掉然后我俩又把cjc的hack hack掉之后,hrz写了一发,直接一遍过(Orz hrz)</p>
+<p>这时候已经过去1h了.</p>
+<h3 id="开始自闭"><a href="#开始自闭" class="headerlink" title="开始自闭"></a>开始自闭</h3><p>A了一题之后cjc继续肝A,我和hrz看D.</p>
+<p>hrz问我xor是不是有分配律,我想了想发现没有.</p>
+<p>但是我发现其实一些$A_i + A_j$的xor是会对消的,但是没有继续往下想(如果想了之后就A了)</p>
+<p>hrz看到了L:</p>
+<blockquote>
+<p>hrz: cjc你看我是不是眼瞎了,这不是sb模拟吗</p>
+</blockquote>
+<p>在大家验证hrz没有看错之后,他又一发过了L</p>
+<p>于是我继续肝F,cjc肝不动A了之后来帮忙.</p>
+<blockquote>
+<p>cjc: 这不是个蠢题吗</p>
+</blockquote>
+<p>cjc爆出了$O(n)$正解,但是他又双叒叕没有清空答案(我把他hack了).</p>
+<p>于是我们成为了罚时最多的队伍……</p>
+<p>我继续看D,hrz开始看J.</p>
+<blockquote>
+<p>cjc: 我发现A好蠢啊.</p>
+</blockquote>
+<p>cjc鸽巢原理盲猜结论,然后我和hrz验证之后,cjc自告奋勇写了一发.</p>
+<p>但是他把<code>Yes</code>和<code>No</code>写错了…….</p>
+<p>然后我们队开始自闭…..,我看了J,说了一发思路,然后cjc和hrz说有道理,但是有个小细节一直处理不了….</p>
+<p>hrz口胡了一发M,但是我们不会写<code>Pollard-rho</code>(<del>虽然不需要</del>)</p>
+<p>继续看D,我给hrz说了对消这个发现:</p>
+<blockquote>
+<p>hrz: 让开让开,我要切D</p>
+</blockquote>
+<p>于是在4:00的时候我们把D终于切掉了.</p>
+<p>然后去吃饭,我和cjc一起吃了碗兰州拉面,hrz点了华莱士.</p>
+<p>最后半个小时了,hrz口胡了K,cjc口胡了I,我也把J的细节弄好了,我们也发现M完全不需要<code>Pollard-rho</code>……</p>
+<p>但是半个小时四道题实在是太极限了,双开,甚至三开都不一定成功,何况单开….</p>
+<p>于是我们颗粒无收….</p>
+<h3 id="赛后"><a href="#赛后" class="headerlink" title="赛后"></a>赛后</h3><p>hwy,xry他们队力克春神拿到rank1,<code>SD省队选手观光团</code>连rk前三都没有进入…..</p>
+<p>虽然这和我们仅仅A了5个题的队相差甚远,但是我们从这场比赛总结了教训:</p>
+<ol>
+<li>决不能顺序开题</li>
+<li>不能照着一个题死磕</li>
+<li>有思路就要往下想</li>
+<li>注意细节</li>
+</ol>
+<h3 id="花絮"><a href="#花絮" class="headerlink" title="花絮"></a>花絮</h3><p>赛后第二天Scape老师整了一个在vjudge上的个人图论练习赛.</p>
+<p>我凭借着做过两题的优势,直接拿到了三个题的一血,最后<code>solved</code>9个题拿到rk1</p>
+<p>hrz<code>solved 7</code>拿到rk4,不过值得一提的是,春神又跨班比赛了,而且又双叒叕创造了两个小时6题的纪录(本菜鸡八个小时才九个题啊)</p>
+<h1 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h1>
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%81%8C%E6%B0%B4%E5%8C%BA/" rel="tag"># 灌水区</a>
+          
+            <a href="/tags/ZROI/" rel="tag"># ZROI</a>
+          
+            <a href="/tags/ACM/" rel="tag"># ACM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/25/LuoguP2048/" rel="next" title="LuoguP2048「NOI2010」题解">
+                <i class="fa fa-chevron-left"></i> LuoguP2048「NOI2010」题解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/30/reprint-never-existed/" rel="prev" title="「文章转载」- 慢慢的，就没有了，就像从未存在过">
+                「文章转载」- 慢慢的，就没有了，就像从未存在过 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/qwqwq.jpg"
+                alt="Cotoliqwq"/>
+            
+              <p class="site-author-name" itemprop="name">Cotoliqwq</p>
+              <div class="site-description motion-element" itemprop="description">我们称之为路的，其实不过是彷徨。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">77</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Herself32" title="GitHub &rarr; https://github.com/Herself32" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/Herself32@outlook.com" title="E-Mail &rarr; Herself32@outlook.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比赛前"><span class="nav-number">2.</span> <span class="nav-text">比赛前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比赛开始"><span class="nav-number">3.</span> <span class="nav-text">比赛开始</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始自闭"><span class="nav-number">4.</span> <span class="nav-text">开始自闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#赛后"><span class="nav-number">5.</span> <span class="nav-text">赛后</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#花絮"><span class="nav-number">6.</span> <span class="nav-text">花絮</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#THE-END"><span class="nav-number"></span> <span class="nav-text">THE END</span></a></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cotoliqwq</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  <script>
+    ;((d, w) => {
+      loadThree = () => {
+        let s = d.createElement('script');
+        s.src = '/lib/three/three.min.js';
+        d.body.appendChild(s);
+      }
+      let styles = ['', '', ''];
+      loadStyle = () => {
+        styles.forEach(x => {
+          if (x !== '') {
+            let s = d.createElement('script');
+            s.src = x;
+            d.body.appendChild(s);
+          }
+        })
+      }
+      w.addEventListener('DOMContentLoaded', loadThree);
+      w.addEventListener('load', loadStyle);
+    })(document, window);
+  </script>
+
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

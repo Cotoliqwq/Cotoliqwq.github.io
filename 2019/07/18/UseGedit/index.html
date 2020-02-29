@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <meta name="description" content="Gedit 是 GNOME 桌面环境的官方文本编辑器。它简单易用，是一款强大的通用文本编辑器。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu自带代码神器-gedit入门">
+<meta property="og:url" content="http://yoursite.com/2019/07/18/UseGedit/index.html">
+<meta property="og:site_name" content="Cotoliqwq&#39;s Blog">
+<meta property="og:description" content="Gedit 是 GNOME 桌面环境的官方文本编辑器。它简单易用，是一款强大的通用文本编辑器。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/17/ELfiFA.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/17/ELfaTJ.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/17/EL4S5d.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/17/EL4wxx.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/17/EL5Glt.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/18/EO9iz6.md.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/18/EO9ELD.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/05/18/EO9mod.md.png">
+<meta property="article:published_time" content="2019-07-18T01:19:07.000Z">
+<meta property="article:modified_time" content="2019-07-18T01:20:58.000Z">
+<meta property="article:author" content="Cotoliqwq">
+<meta property="article:tag" content="使用指南">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/05/17/ELfiFA.md.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/07/18/UseGedit/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Ubuntu自带代码神器-gedit入门 | Cotoliqwq's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cotoliqwq's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">呜咽, 在风中作陪</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-友链">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/links/" rel="section"><i class="menu-item-icon fa fa-fw fa-link"></i> <br/>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-模板">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/templates/" rel="section"><i class="menu-item-icon fa fa-fw fa-code"></i> <br/>模板</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/18/UseGedit/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cotoliqwq"/>
+      <meta itemprop="description" content="我们称之为路的，其实不过是彷徨。"/>
+      <meta itemprop="image" content="/images/qwqwq.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cotoliqwq's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Ubuntu自带代码神器-gedit入门
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-18 09:19:07 / 修改时间：09:20:58" itemprop="dateCreated datePublished" datetime="2019-07-18T09:19:07+08:00">2019-07-18</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br/>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Gedit 是 GNOME 桌面环境的官方文本编辑器。它简单易用，是一款强大的通用文本编辑器。</p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="ubuntu自带代码神器-gedit入门"><a href="#ubuntu自带代码神器-gedit入门" class="headerlink" title="ubuntu自带代码神器-gedit入门"></a>ubuntu自带代码神器-gedit入门</h1><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>自从换装了ubuntu18.04,代码编辑器也随之发生变化。</p>
+<p>老旧而丑陋的Dev-C++已经无法满足<del>新时代OIer思想准则</del>要求，需要“更新，换装”。</p>
+<p>在尝试使用和配置神仙编辑器vim屡次失败后，Herself32还是选择了相对来说对新手更为友好的gedit。</p>
+<p>先来看看Ubuntu-AppStore和百度百科怎么介绍gedit.</p>
+<blockquote>
+<p>Gedit 是 GNOME 桌面环境的官方文本编辑器。它简单易用，是一款强大的通用文本编辑器。 ————————Ubuntu-AppStore</p>
+</blockquote>
+<blockquote>
+<p>gedit是一个GNOME桌面环境下兼容UTF-8的文本编辑器。它使用GTK+编写而成，因此它十分的简单易用，有良好的语法高亮，对中文支持很好，支持包括gb2312、gbk在内的多种字符编码。gedit是一个自由软件。这是 Linux 下的一个纯文本编辑器,但你也可以把它用来当成是一个集成开发环境 (IDE), 它会根据不同的语言高亮显现关键字和标识符。 ————————baike.baidu.com</p>
+</blockquote>
+<p><a href="https://wiki.gnome.org/Apps/Gedit" target="_blank" rel="noopener">Gedit官网</a>.</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>一般的Linux系统<strong>基本上</strong>都会自带gedit，如果不自带，请打开终端<strong>按顺序</strong>输入以下命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt install gedit-gmate</span><br><span class="line">sudo apt install gedit-plugins</span><br><span class="line">sudo apt-get remove gedit</span><br><span class="line">sudo apt install gedit</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>打开gedit，你会发现如下白皑皑的一片。</p>
+<p><a href="https://imgchr.com/i/ELfiFA" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/17/ELfiFA.md.png" alt="ELfiFA.md.png"></a></p>
+<p>大体来说，没有经过任何配置的gedit基本上不可用（除非你只是把他拿来编辑txt）。</p>
+<p>因为只能选择编辑语言、缩进格式、行号、折叠、高亮这一类基础的东西。</p>
+<p>而至于括号匹配、最著名的片断编辑、字符匹配、自配高亮以及最重要的编译和运行源程序统统没有。</p>
+<p>我们一步一步来讲。</p>
+<h4 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h4><p>首先，如果你的gedit不是最新版本，那么请在更新后继续阅读本教程。</p>
+<p>建议输入以下命令或在软件更新器里寻找。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure>
+
+<p>首先找到gedit的首选项（在电脑屏幕最上方的窗口(gedit)处，点击一下gedit图标，找到首选项即可）。</p>
+<p><img src="https://s2.ax1x.com/2019/05/17/ELfaTJ.png" alt="ELfaTJ.png"></p>
+<p>然后根据提示，自己随意添加吧！</p>
+<p>推荐来说选择:<br>插入日期/时间、代码注释、单词补全、嵌入终端、括号补全、模式行、<strong>片段</strong>、拼写检查器、色彩方案编辑器、<strong>外部工具</strong>、文档统计、文件浏览器面板、在文件中查找</p>
+<p>这几个插件（标粗的插件请务必安装，因为在后面的教程中要用到）。</p>
+<p>更多关于插件的知识可以上这个网站：<a href="https://help.gnome.org/users/gedit/stable/gedit-plugin-guide.html.zh_CN" target="_blank" rel="noopener">Gedit-Plugins</a></p>
+<h4 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h4><p>首先我们可以在首选项中选择字体和配色方案。</p>
+<p>安装好“色彩方案编辑器”插件后，我们可以打开Color Sheme Editor</p>
+<p><a href="https://imgchr.com/i/EL4S5d" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/17/EL4S5d.md.png" alt="EL4S5d.md.png"></a></p>
+<p>找到一个自己喜欢的就好了啦！</p>
+<h4 id="片段"><a href="#片段" class="headerlink" title="片段"></a>片段</h4><p>安装好片段的插件之后，我们就可以来学习一下编辑器中最著名的片段编辑方式了。</p>
+<p>在平常的代码书写或文本编辑中，我们常常用到同一个句式的句子，但可能最后的某几个参数不一样，这样我们就可以通过片段的方式来减少书写量。</p>
+<p>比如我们这里以C++为例，打开gedit，输入td，然后按一下Tab键，你会发现：<br><img src="https://s2.ax1x.com/2019/05/17/EL4wxx.png" alt="EL4wxx.png"></p>
+<p>为了让这个玄学事件发生的更广泛，我们打开gedit图标，找到管理片段的选项并打开。</p>
+<p><a href="https://imgchr.com/i/EL5Glt" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/17/EL5Glt.md.png" alt="EL5Glt.md.png"></a></p>
+<p>点击下方的小加号创建一个新的片段，然后取个名字。</p>
+<p>在Tab触发器一栏里写一下触发标记，设置个快捷键也可以。</p>
+<p>删除就是小减号，记得要选中片段呢。</p>
+<h4 id="编译和运行"><a href="#编译和运行" class="headerlink" title="编译和运行"></a>编译和运行</h4><p>这里我们以C++和JavaScript为例来说明，首先我们点击gedit图标，找到外部工具一栏：</p>
+<p><a href="https://imgchr.com/i/EO9iz6" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/18/EO9iz6.md.png" alt="EO9iz6.md.png"></a></p>
+<p>点击左下方的小加号创建一个新的外部工具，最好命名为<code>Comepile-Code</code>(如图)，在编码区写入以下命令。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">fullname=$GEDIT_CURRENT_DOCUMENT_NAME</span><br><span class="line">name=`echo $fullname | cut -d. -f1`</span><br><span class="line">suffix=`echo $fullname | cut -d. -f2`</span><br><span class="line">if [ $suffix = "cpp" ] || [ $suffix = "c++" ] || [ $suffix = "cc" ] || [ $suffix = "cxx" ] || [ $suffix = "C" ]; then</span><br><span class="line">	g++ $fullname -o $name -O2 -Wall -std=gnu++0x -static -lm</span><br><span class="line">elif [ $suffix = "java" ];	then</span><br><span class="line">	javac $fullname -encoding UTF-8 -sourcepath . -d .</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p>代码来自某大佬的CSDN博客。</p>
+<p>然后设置一下快捷键，比如<code>Ctrl+F5</code>等等。</p>
+<p>再次点击小加号创建外部工具，命名为<code>Run-Code</code>(如图)，在编码区写入以下命令。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">fullname=$GEDIT_CURRENT_DOCUMENT_NAME</span><br><span class="line">name=`echo $fullname | cut -d. -f1`</span><br><span class="line">suffix=`echo $fullname | cut -d. -f2`</span><br><span class="line">dir=$GEDIT_CURRENT_DOCUMENT_DIR</span><br><span class="line"></span><br><span class="line">if [ $suffix = "cpp" ] || [ $suffix = "c++" ] || [ $suffix = "cc" ] || [ $suffix = "cxx" ] || [ $suffix = "C" ]; then</span><br><span class="line">	gnome-terminal --hide-menubar --working-directory=$dir -t "Terminal-$name" -x bash -c "$dir/$name; echo;echo 'press ENTER to continue';read"</span><br><span class="line">elif [ $suffix = "java" ];	then</span><br><span class="line">	gnome-terminal --hide-menubar --working-directory=$dir -t "Terminal-$name" -x bash -c "java $name echo;echo 'press ENTER to continue';read"</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<p>还是来自那一位大佬的CSDN博客。</p>
+<p>设好快捷键，就可以编译并运行啦！</p>
+<h4 id="Python控制台"><a href="#Python控制台" class="headerlink" title="Python控制台"></a>Python控制台</h4><p>首先我们要在首选项-&gt;插件中安装Python控制台的插件。</p>
+<p><img src="https://s2.ax1x.com/2019/05/18/EO9ELD.png" alt="EO9ELD.png"></p>
+<p>然后回到文本中，按下<code>Ctrl+F9</code>就可以在Python控制台中调试了！</p>
+<p><a href="https://imgchr.com/i/EO9mod" target="_blank" rel="noopener"><img src="https://s2.ax1x.com/2019/05/18/EO9mod.md.png" alt="EO9mod.md.png"></a></p>
+<p>熟悉的Python调试界面QWQ。</p>
+<h1 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h1>
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" rel="tag"># 使用指南</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/18/ZROI2019-07-17Contest/" rel="next" title="ZROI2019/07/17CD班统考摸底赛题解">
+                <i class="fa fa-chevron-left"></i> ZROI2019/07/17CD班统考摸底赛题解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/19/LuoguP4884/" rel="prev" title="LuoguP4884题解">
+                LuoguP4884题解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/qwqwq.jpg"
+                alt="Cotoliqwq"/>
+            
+              <p class="site-author-name" itemprop="name">Cotoliqwq</p>
+              <div class="site-description motion-element" itemprop="description">我们称之为路的，其实不过是彷徨。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">77</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Herself32" title="GitHub &rarr; https://github.com/Herself32" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/Herself32@outlook.com" title="E-Mail &rarr; Herself32@outlook.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ubuntu自带代码神器-gedit入门"><span class="nav-number">1.</span> <span class="nav-text">ubuntu自带代码神器-gedit入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.0.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.0.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">1.0.3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#插件"><span class="nav-number">1.0.3.1.</span> <span class="nav-text">插件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主题"><span class="nav-number">1.0.3.2.</span> <span class="nav-text">主题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#片段"><span class="nav-number">1.0.3.3.</span> <span class="nav-text">片段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编译和运行"><span class="nav-number">1.0.3.4.</span> <span class="nav-text">编译和运行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Python控制台"><span class="nav-number">1.0.3.5.</span> <span class="nav-text">Python控制台</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#THE-END"><span class="nav-number">2.</span> <span class="nav-text">THE END</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cotoliqwq</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  <script>
+    ;((d, w) => {
+      loadThree = () => {
+        let s = d.createElement('script');
+        s.src = '/lib/three/three.min.js';
+        d.body.appendChild(s);
+      }
+      let styles = ['', '', ''];
+      loadStyle = () => {
+        styles.forEach(x => {
+          if (x !== '') {
+            let s = d.createElement('script');
+            s.src = x;
+            d.body.appendChild(s);
+          }
+        })
+      }
+      w.addEventListener('DOMContentLoaded', loadThree);
+      w.addEventListener('load', loadStyle);
+    })(document, window);
+  </script>
+
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

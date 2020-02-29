@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <meta name="description" content="本文会持续更新…….">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分块全家桶刷题笔记">
+<meta property="og:url" content="http://yoursite.com/2019/10/10/Partition/index.html">
+<meta property="og:site_name" content="Cotoliqwq&#39;s Blog">
+<meta property="og:description" content="本文会持续更新…….">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-10-10T14:38:18.000Z">
+<meta property="article:modified_time" content="2019-10-16T09:18:19.000Z">
+<meta property="article:author" content="Cotoliqwq">
+<meta property="article:tag" content="Solutions">
+<meta property="article:tag" content="分块">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/10/10/Partition/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>分块全家桶刷题笔记 | Cotoliqwq's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cotoliqwq's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">呜咽, 在风中作陪</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-友链">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/links/" rel="section"><i class="menu-item-icon fa fa-fw fa-link"></i> <br/>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-模板">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/templates/" rel="section"><i class="menu-item-icon fa fa-fw fa-code"></i> <br/>模板</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/10/Partition/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cotoliqwq"/>
+      <meta itemprop="description" content="我们称之为路的，其实不过是彷徨。"/>
+      <meta itemprop="image" content="/images/qwqwq.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cotoliqwq's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">分块全家桶刷题笔记
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-10 22:38:18" itemprop="dateCreated datePublished" datetime="2019-10-10T22:38:18+08:00">2019-10-10</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-10-16 17:18:19" itemprop="dateModified" datetime="2019-10-16T17:18:19+08:00">2019-10-16</time>
+              </span>
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br/>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本文会持续更新…….</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>本篇文章是菜鸡<code>Herself32</code>做过一些分块题之后的总结, 所以写的比较屑/kk.</p>
+<p>其实这东西就是<code>Herself32</code>做过的一些分块题的整理, 可以当成一个<code>Problem List</code>看看.</p>
+<p>当然如果您觉得这些题太水或者说博主写的很sb, 也请轻喷啊qwq</p>
+<h3 id="LOJ6277"><a href="#LOJ6277" class="headerlink" title="LOJ6277"></a>LOJ6277</h3><p><a href="https://loj.ac/problem/6277" target="_blank" rel="noopener">Link</a></p>
+<hr>
+<p>最基础的分块题了吧, 对于每一个块记个<code>tag</code>, 整块加法改<code>tag</code>, 零散元素就暴力改.</p>
+<p>查询的时候记得把<code>a[i]</code>加上<code>tag</code>再输出.</p>
+<p><a href="https://paste.ubuntu.com/p/YFY9vvcZRh/" target="_blank" rel="noopener">$\rm Code$</a></p>
+<h3 id="LOJ6278"><a href="#LOJ6278" class="headerlink" title="LOJ6278"></a>LOJ6278</h3><p><a href="https://loj.ac/problem/6278" target="_blank" rel="noopener">Link</a></p>
+<hr>
+<p>用一个<code>vector</code>维护块内的数字, 然后给每一块排个序, 整块查询的时候直接二分<code>lower_bound</code>一下就完了, 零散元素就暴力查.</p>
+<p>因为区间加法并不影响整块的有序性, 那么我们只需要对离散元素所在的块重新排序即可.</p>
+<p>这样的话查询的时候对于整块就应该以<code>v - tag</code>为关键字查找.</p>
+<p><a href="https://paste.ubuntu.com/p/dzzMPDxSC6/" target="_blank" rel="noopener">$\rm Code$</a></p>
+<h3 id="LOJ6279"><a href="#LOJ6279" class="headerlink" title="LOJ6279"></a>LOJ6279</h3><p><a href="https://loj.ac/problem/6279" target="_blank" rel="noopener">Link</a></p>
+<hr>
+<p>考虑沿用上一个题的思路, 只需要改一下二分的东西即可.</p>
+<p>首先<code>lower_bound</code>找出位置, 然后从<code>vector</code>的<code>begin</code>开始枚举然后取<code>max</code>即可.</p>
+<p><a href="https://paste.ubuntu.com/p/vhDsxBncSg/" target="_blank" rel="noopener">$\rm Code$</a></p>
+<h3 id="LOJ6280"><a href="#LOJ6280" class="headerlink" title="LOJ6280"></a>LOJ6280</h3><p><a href="https://loj.ac/problem/6280" target="_blank" rel="noopener">Link</a></p>
+<hr>
+<p>对于每一个块记个<code>sum</code>, 表示这个块的元素之和.</p>
+<p>对于零散元素, 直接暴力修改<code>a[i]</code>和<code>sum[Belong[i]]</code>, 查询的时候暴力加<code>a[i] + tag[Belong[i]]</code>.</p>
+<p>对于整块, 修改就直接改<code>tag</code>数组, 查询则直接加上<code>sum[i] + tag[i] * block</code>即可.</p>
+<p><a href="https://paste.ubuntu.com/p/Bfps4CrvyK/" target="_blank" rel="noopener">$\rm Code$</a></p>
+<h3 id="LOJ6281"><a href="#LOJ6281" class="headerlink" title="LOJ6281"></a>LOJ6281</h3><p><a href="https://loj.ac/problem/6281" target="_blank" rel="noopener">Link</a></p>
+<hr>
+<p>考虑一个$10^9$级别的数, 被开$5$次方之后就变成$1$了.</p>
+<p>所以我们开一个<code>CSQRT</code>数组表示某个块里面是否还有$&gt;1$的数字, 如果没有那就不用开了.</p>
+<p>那么利用这个性质, 直接暴力操作即可, 其他和之前题目一样.</p>
+<p><a href="https://paste.ubuntu.com/p/Zmm5cqt4PY/" target="_blank" rel="noopener">$\rm Code$</a></p>
+<h3 id="LOJ6282"><a href="#LOJ6282" class="headerlink" title="LOJ6282"></a>LOJ6282</h3><p><a href="https://loj.ac/problem/6282" target="_blank" rel="noopener">Link</a></p>
+<hr>
+<p>在数据随机的情况下, 每个块会被等概率的插入元素, 用一个<code>vector</code>维护一下, 复杂度还是$O(m\sqrt{n})$.</p>
+<p>但是如果出现极限情况, 即一直向一个(或较少的几个)块中插入, 就会导致复杂度的变化.</p>
+<p>那么考虑设立一个阈值$\alpha$, 如果当某一个块的大小超过了$\alpha \times block$那么就进行重构.</p>
+<p>经过一些神奇的分析, 我们可以认为$\alpha = 20$时对于本题来说较优.</p>
+<p>当然我们也可以每进行$\sqrt{n}$次插入就进行一次重构, 复杂度也是$O(m\sqrt{n})$的.</p>
+<p><a href="https://paste.ubuntu.com/p/r2DDDmkkXw/" target="_blank" rel="noopener">$\rm Code$</a></p>
+<h3 id="LuoguP3396"><a href="#LuoguP3396" class="headerlink" title="LuoguP3396"></a>LuoguP3396</h3><p><a href="https://www.luogu.org/problem/P3396" target="_blank" rel="noopener">Link</a></p>
+<hr>
+<p>考虑数据分治, 以$\sqrt{n}$为界限.</p>
+<p>设$f_{i,j}$表示在$\mod i$意义下余数为$j$的数的总和, 这显然可以$O(n\sqrt{n})$预处理出来.</p>
+<p>小于$\sqrt{n}$的就直接输出<code>f</code>内的对应答案, 大于就暴力算即可.</p>
+<p><a href="https://paste.ubuntu.com/p/PM6yR35zgF/" target="_blank" rel="noopener">$\rm Code$</a></p>
+<h3 id="LuoguP2801"><a href="#LuoguP2801" class="headerlink" title="LuoguP2801"></a>LuoguP2801</h3><p><a href="https://www.luogu.org/problem/P2801" target="_blank" rel="noopener">Link</a></p>
+<hr>
+<p>几乎是LOJ6278的重题, 二分的时候用总数减掉<code>lower_bound</code>出来的数即可.</p>
+<p>由于是半年前写的题, 所以码风比较屑, 就不放出来丢人了.</p>
+<h3 id="LuoguP3203"><a href="#LuoguP3203" class="headerlink" title="LuoguP3203"></a>LuoguP3203</h3><p><a href="https://www.luogu.org/problem/P3203" target="_blank" rel="noopener">Link</a></p>
+<hr>
+<p>考虑对于每一个点维护两个值, 一个是从这个点开始需要弹多少次才能被弹出这个块, 一个是被弹出去之后到了哪里.</p>
+<p>查询就沿着维护的第二个值蹦蹦跳跳的加一遍完事, 修改就块内暴力重构.</p>
+<p>由于是半年前写的题, 所以码风比较屑, 就不放出来丢人了.</p>
+<h3 id="LuoguP3645"><a href="#LuoguP3645" class="headerlink" title="LuoguP3645"></a>LuoguP3645</h3><p><a href="https://www.luogu.org/problem/P3645" target="_blank" rel="noopener">Link</a></p>
+<hr>
+<p>一个显然的想法是, 把<code>doge</code>们从起点和它所能到达的所有点连边, 然后跑最短路, 但这样显然不行(<del>显然的想法显然不行</del>).</p>
+<p>那么如果我们把<code>doge</code>们跳跃过程中的每一个一个点和下一个节点连边, 可以吗?</p>
+<p>这个看起来还挺有道理, 但如果我们从中间某个点出发, 这个做法就莫得了.</p>
+<p>考虑用分块优化(Upd: 这玩意是根号分治)建分层图, 建立$\sqrt{n}$层图, 对于前$\sqrt{n}$个点, 在子图中每个点$i$连向$i+P_i$和$i-P_i$, 然后这些点就只需要连一条边权为$0$的边向子图中的自己即可.</p>
+<p>其他的点就直接按照暴力的连边方法, 然后我们跑一遍最短路就完了.</p>
+<h1 id="TO-BE-CONTINUE"><a href="#TO-BE-CONTINUE" class="headerlink" title="TO BE CONTINUE"></a>TO BE CONTINUE</h1>
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Solutions/" rel="tag"># Solutions</a>
+          
+            <a href="/tags/%E5%88%86%E5%9D%97/" rel="tag"># 分块</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/09/LuoguP4137/" rel="next" title="LuoguP4137题解">
+                <i class="fa fa-chevron-left"></i> LuoguP4137题解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/11/Herself32-Diary/" rel="prev" title="Herself32の日记">
+                Herself32の日记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/qwqwq.jpg"
+                alt="Cotoliqwq"/>
+            
+              <p class="site-author-name" itemprop="name">Cotoliqwq</p>
+              <div class="site-description motion-element" itemprop="description">我们称之为路的，其实不过是彷徨。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">77</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Herself32" title="GitHub &rarr; https://github.com/Herself32" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/Herself32@outlook.com" title="E-Mail &rarr; Herself32@outlook.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LOJ6277"><span class="nav-number">2.</span> <span class="nav-text">LOJ6277</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LOJ6278"><span class="nav-number">3.</span> <span class="nav-text">LOJ6278</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LOJ6279"><span class="nav-number">4.</span> <span class="nav-text">LOJ6279</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LOJ6280"><span class="nav-number">5.</span> <span class="nav-text">LOJ6280</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LOJ6281"><span class="nav-number">6.</span> <span class="nav-text">LOJ6281</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LOJ6282"><span class="nav-number">7.</span> <span class="nav-text">LOJ6282</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LuoguP3396"><span class="nav-number">8.</span> <span class="nav-text">LuoguP3396</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LuoguP2801"><span class="nav-number">9.</span> <span class="nav-text">LuoguP2801</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LuoguP3203"><span class="nav-number">10.</span> <span class="nav-text">LuoguP3203</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LuoguP3645"><span class="nav-number">11.</span> <span class="nav-text">LuoguP3645</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TO-BE-CONTINUE"><span class="nav-number"></span> <span class="nav-text">TO BE CONTINUE</span></a></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cotoliqwq</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  <script>
+    ;((d, w) => {
+      loadThree = () => {
+        let s = d.createElement('script');
+        s.src = '/lib/three/three.min.js';
+        d.body.appendChild(s);
+      }
+      let styles = ['', '', ''];
+      loadStyle = () => {
+        styles.forEach(x => {
+          if (x !== '') {
+            let s = d.createElement('script');
+            s.src = x;
+            d.body.appendChild(s);
+          }
+        })
+      }
+      w.addEventListener('DOMContentLoaded', loadThree);
+      w.addEventListener('load', loadStyle);
+    })(document, window);
+  </script>
+
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

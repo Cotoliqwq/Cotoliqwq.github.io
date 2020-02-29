@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <meta name="description" content="我是鸽子&#x2F;cy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LuoguP5358「SDOI2019」题解">
+<meta property="og:url" content="http://yoursite.com/2020/02/29/LuoguP5358/index.html">
+<meta property="og:site_name" content="Cotoliqwq&#39;s Blog">
+<meta property="og:description" content="我是鸽子&#x2F;cy">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-02-29T10:32:27.000Z">
+<meta property="article:modified_time" content="2020-02-29T11:43:27.534Z">
+<meta property="article:author" content="Cotoliqwq">
+<meta property="article:tag" content="Solutions">
+<meta property="article:tag" content="SDOI">
+<meta property="article:tag" content="神奇的解法">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2020/02/29/LuoguP5358/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>LuoguP5358「SDOI2019」题解 | Cotoliqwq's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cotoliqwq's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">呜咽, 在风中作陪</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-友链">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/links/" rel="section"><i class="menu-item-icon fa fa-fw fa-link"></i> <br/>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-模板">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/templates/" rel="section"><i class="menu-item-icon fa fa-fw fa-code"></i> <br/>模板</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/29/LuoguP5358/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cotoliqwq"/>
+      <meta itemprop="description" content="我们称之为路的，其实不过是彷徨。"/>
+      <meta itemprop="image" content="/images/qwqwq.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cotoliqwq's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">LuoguP5358「SDOI2019」题解
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-02-29 18:32:27 / 修改时间：19:43:27" itemprop="dateCreated datePublished" datetime="2020-02-29T18:32:27+08:00">2020-02-29</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br/>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>我是鸽子/cy</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>给定一个长度为$n$的整数数列，里面的元素依次编号为 $a_1,<del>a_2,</del>a_3,<del>\dots,</del>a_n$ .初始的时候，所有元素都为零。现在按照时间顺序提供了若干次关于这个数列的修改或询问，每一次修改或询问一定为以下六种情况之一：</p>
+<ul>
+<li>$\rm 1 \text{ }i \text{ }val$ : 将$a_i$赋值为给定整数$\rm val$.</li>
+<li>$\rm 2 \text{ }val$ : 将所有元素同时加上$\rm val$.</li>
+<li>$\rm 3 \text{ }val$ : 将所有元素同时乘上 $\rm val$.</li>
+<li>$\rm 4 \text{ }val$ : 将所有元素同时赋值为 $\rm val$.</li>
+<li>$\rm 5 \text{ }i$ : 询问第$\rm i$个元素 $a_i$​ 现在的值是多少.</li>
+<li>$\rm 6$ : 询问现在所有元素的和.</li>
+</ul>
+<h3 id="Samples"><a href="#Samples" class="headerlink" title="Samples"></a>Samples</h3><h4 id="Input-1"><a href="#Input-1" class="headerlink" title="Input #1"></a>Input #1</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">7</span><br><span class="line">28</span><br><span class="line">6</span><br><span class="line">4 -192321079</span><br><span class="line">3 418379342</span><br><span class="line">1 3 189801569</span><br><span class="line">3 -840249197</span><br><span class="line">4 -751917965</span><br><span class="line">3 649799919</span><br><span class="line">1 5 -92666141</span><br><span class="line">6</span><br><span class="line">4 451258008</span><br><span class="line">5 1</span><br><span class="line">4 696880327</span><br><span class="line">3 772574465</span><br><span class="line">6</span><br><span class="line">4 301010289</span><br><span class="line">3 480168068</span><br><span class="line">5 3</span><br><span class="line">5 2</span><br><span class="line">4 840536237</span><br><span class="line">5 5</span><br><span class="line">5 4</span><br><span class="line">1 7 -792284106</span><br><span class="line">2 604521872</span><br><span class="line">3 966540578</span><br><span class="line">2 -381646699</span><br><span class="line">3 -939378260</span><br><span class="line">2 -20129935</span><br><span class="line">6</span><br><span class="line">2</span><br><span class="line">0 1</span><br><span class="line">197 199</span><br></pre></td></tr></table></figure>
+<h4 id="Output-1"><a href="#Output-1" class="headerlink" title="Output #1"></a>Output #1</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2816930</span><br></pre></td></tr></table></figure>
+
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>简单概括一下题意就是: 维护一个长度为 $n$ 的序列，要求支持单点赋值、整体赋值、整体加、整体乘、单点查询和整体求和。</p>
+<p>序列长度极大，有$10^9$, 要求执行操作复杂度$\mathcal O(1)$.</p>
+<p>显然$\rm Subtask 1$直接随便拿一个平衡树就好了。</p>
+<p>注意到本质不同的操作只有$10^5$个，那么可以把涉及的编号拿出来离散化一下即可。</p>
+<p>因为所有的区间操作全部是针对整个数列的，考虑类似于分块打标记的方式，我们维护四个标记：</p>
+<ul>
+<li>$\rm add$ 全局加标记，$\rm mul$ 全局乘标记， $\rm sum$ 全局和标记， $\rm inv$ 逆元标记。</li>
+</ul>
+<p>针对操作二，那么就有<code>add += val, sum += n * val</code>.</p>
+<p>针对操作三，那么就有<code>add *= val, mul *= val, sum *= val</code>.</p>
+<p>针对操作四，之前的修改全都白费了，就有<code>add = 0, mul = 1, sum = n * val</code>.</p>
+<p>针对操作五，那么就有<code>ans += mul * a[x] + add</code>.</p>
+<p>操作六就直接在答案上累加<code>sum</code>标记即可。</p>
+<p>考虑操作一， 由于我们要考虑标记，所以不能把$\rm a_x$直接赋值为$\rm val$, 假设我们这么干了，那么我们统计的答案就是<code>mul * val + add</code>.</p>
+<p>但是实际上查询这个点，我们直到结果应该是<code>val</code>, 那么可以得到<code>val_real = (val - add) * inv</code>.</p>
+<p>注意进行这个操作的同时，全局和标记也需要修改，即<code>sum += val_real - val</code>.</p>
+<p>其他的就是注意随地取模，注意下细节就好了，时间复杂度$\mathcal O(q \log q + tq)$</p>
+<h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Headers */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;climits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;array&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FOR(i,a,b,c) for(int i=(a);i&lt;=(b);i+=(c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ROF(i,a,b,c) for(int i=(a);i&gt;=(b);i-=(c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FORL(i,a,b,c) for(long long i=(a);i&lt;=(b);i+=(c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ROFL(i,a,b,c) for(long long i=(a);i&gt;=(b);i-=(c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FORR(i,a,b,c) for(register int i=(a);i&lt;=(b);i+=(c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ROFR(i,a,b,c) for(register int i=(a);i&gt;=(b);i-=(c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RevEdge(x) x^1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) x&amp;(-x)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LeftChild(x) x&lt;&lt;1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RightChild(x) (x&lt;&lt;1)+1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLOSE_IN() fclose(stdin);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLOSE_OUT() fclose(stdout);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FILE_IN(x) freopen(x,<span class="meta-string">"r"</span>,stdin);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FILE_OUT(x) freopen(x,<span class="meta-string">"w"</span>,stdout);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IOS(x) std::ios::sync_with_stdio(x)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Dividing() printf(<span class="meta-string">"-----------------------------------\n"</span>);</span></span><br><span class="line"><span class="keyword">namespace</span> FastIO&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> BUFSIZE = <span class="number">1</span> &lt;&lt; <span class="number">20</span>;</span><br><span class="line">    <span class="keyword">char</span> ibuf[BUFSIZE], *is = ibuf, *its = ibuf;</span><br><span class="line">    <span class="keyword">char</span> obuf[BUFSIZE], *os = obuf, *ot = obuf + BUFSIZE;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">char</span> <span class="title">getch</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(is == its)</span><br><span class="line">            its = (is = ibuf) + fread(ibuf, <span class="number">1</span>, BUFSIZE, <span class="built_in">stdin</span>);</span><br><span class="line">        <span class="keyword">return</span> (is == its) ? EOF : *is++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">getint</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>,neg = <span class="number">0</span>,ch = getch();</span><br><span class="line">        <span class="keyword">while</span>(!(<span class="built_in">isdigit</span>(ch) || ch == <span class="string">'-'</span>) &amp;&amp; ch != EOF)</span><br><span class="line">            ch = getch();</span><br><span class="line">        <span class="keyword">if</span>(ch == <span class="string">'-'</span>) &#123;neg = <span class="number">1</span>;ch = getch();&#125;</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch)) &#123;</span><br><span class="line">            res = (res &lt;&lt; <span class="number">3</span>) + (res &lt;&lt; <span class="number">1</span>)+ (ch - <span class="string">'0'</span>);</span><br><span class="line">            ch = getch();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> neg ? -res : res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">flush</span><span class="params">()</span></span>&#123;</span><br><span class="line">        fwrite(obuf, <span class="number">1</span>, os - obuf, <span class="built_in">stdout</span>);</span><br><span class="line">        os = obuf;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">putch</span><span class="params">(<span class="keyword">char</span> ch)</span></span>&#123;</span><br><span class="line">        *os++ = ch;</span><br><span class="line">        <span class="keyword">if</span>(os == ot) flush();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">putint</span><span class="params">(<span class="keyword">int</span> res)</span></span>&#123;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">char</span> q[<span class="number">10</span>];</span><br><span class="line">        <span class="keyword">if</span>(res == <span class="number">0</span>) putch(<span class="string">'0'</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(res &lt; <span class="number">0</span>)&#123;putch(<span class="string">'-'</span>);res = -res;&#125;</span><br><span class="line">        <span class="keyword">int</span> top = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(res)&#123;</span><br><span class="line">            q[top++] = res % <span class="number">10</span> + <span class="string">'0'</span>;</span><br><span class="line">            res /= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(top--) putch(q[top]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">space</span><span class="params">(<span class="keyword">bool</span> x)</span></span>&#123;</span><br><span class="line">    	<span class="keyword">if</span>(!x) putch(<span class="string">'\n'</span>);</span><br><span class="line">    	<span class="keyword">else</span> putch(<span class="string">' '</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> &amp;x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> rt = FastIO::getint();</span><br><span class="line">    x = rt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">bool</span> enter)</span></span>&#123;</span><br><span class="line">    FastIO::putint(x);</span><br><span class="line">    FastIO::flush();</span><br><span class="line">    FastIO::space(enter);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> T <span class="title">max</span><span class="params">(T a, T b)</span> </span>&#123;<span class="keyword">return</span> (a &gt; b) ? a : b;&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> T <span class="title">min</span><span class="params">(T a, T b)</span> </span>&#123;<span class="keyword">return</span> (a &gt; b) ? b : a;&#125;</span><br><span class="line"><span class="comment">/* definitions */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">1e5</span> + <span class="number">10</span>, mod = <span class="number">1e7</span> + <span class="number">19</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, T, A[MAXN], B[MAXN], d[MAXN], ser[MAXN], rser[MAXN], cnt, tot;</span><br><span class="line">ll a[MAXN], add, mul, sum, inv, ans;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Query</span> &#123;</span><span class="keyword">int</span> opt, x, y;&#125; q[MAXN];</span><br><span class="line"><span class="comment">/* functions */</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">quick_power</span><span class="params">(ll a, ll b, ll p = mod)</span> </span>&#123;</span><br><span class="line">    ll res = <span class="number">1l</span>l, base = a;</span><br><span class="line">    <span class="keyword">while</span>(b) &#123;</span><br><span class="line">        <span class="keyword">if</span>(b &amp; <span class="number">1</span>) res = res * base % p;</span><br><span class="line">        b &gt;&gt;= <span class="number">1</span>; base = base * base % p;</span><br><span class="line">    &#125; <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> opt, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    ll last, now;</span><br><span class="line">    <span class="keyword">if</span>(opt == <span class="number">1</span>) &#123;</span><br><span class="line">        last = (a[ser[x]] * mul + add) % mod; sum = (sum - last + y) % mod;</span><br><span class="line">        now = (y - add) * inv % mod; (!ser[x]) ? rser[ser[x] = ++cnt] = x : <span class="number">0</span>;</span><br><span class="line">        a[ser[x]] = now;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(opt == <span class="number">2</span>) &#123;</span><br><span class="line">        add = (add + x) % mod; sum = (sum + <span class="number">1l</span>l * n * x) % mod;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(opt == <span class="number">3</span>) &#123;</span><br><span class="line">        add = add * x % mod; mul = mul * x % mod; sum = sum * x % mod; inv = inv * y % mod;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(opt == <span class="number">4</span>) &#123;</span><br><span class="line">        mul = inv = <span class="number">1</span>; add = <span class="number">0</span>; sum = <span class="number">1l</span>l * n * x % mod;</span><br><span class="line">        FOR(i, <span class="number">1</span>, cnt, <span class="number">1</span>) ser[rser[i]] = <span class="number">0</span>, a[i] = rser[i] = <span class="number">0</span>;</span><br><span class="line">        a[<span class="number">0</span>] = x; cnt = <span class="number">0</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(opt == <span class="number">5</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!x || !ser[x]) ans = (ans + (a[<span class="number">0</span>] * mul + add) % mod) % mod;</span><br><span class="line">        <span class="keyword">else</span> ans = (ans + (a[ser[x]] * mul + add) % mod) % mod;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(opt == <span class="number">6</span>) ans = (ans + sum) % mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    FILE_IN(<span class="string">"data.in"</span>); read(n); read(m);</span><br><span class="line">    FOR(i, <span class="number">1</span>, m, <span class="number">1</span>) &#123;</span><br><span class="line">        read(q[i].opt);</span><br><span class="line">        <span class="keyword">if</span>(q[i].opt &lt; <span class="number">6</span>) read(q[i].x);</span><br><span class="line">        <span class="keyword">if</span>(q[i].opt == <span class="number">1</span>) read(q[i].y), q[i].y %= mod, d[++tot] = q[i].x;</span><br><span class="line">        <span class="keyword">if</span>(q[i].opt &gt;= <span class="number">2</span> &amp;&amp; q[i].opt &lt;= <span class="number">4</span>) q[i].x %= mod;</span><br><span class="line">    &#125; read(T);</span><br><span class="line">    FOR(i, <span class="number">1</span>, T, <span class="number">1</span>) read(A[i]), read(B[i]);</span><br><span class="line">    <span class="keyword">int</span> now; <span class="built_in">std</span>::sort(d + <span class="number">1</span>, d + tot + <span class="number">1</span>);</span><br><span class="line">    tot = <span class="built_in">std</span>::unique(d + <span class="number">1</span>, d + tot + <span class="number">1</span>) - d - <span class="number">1</span>;</span><br><span class="line">    FOR(i, <span class="number">1</span>, m, <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(q[i].opt == <span class="number">1</span>) q[i].x = <span class="built_in">std</span>::lower_bound(d + <span class="number">1</span>, d + tot + <span class="number">1</span>, q[i].x) - d;</span><br><span class="line">        <span class="keyword">if</span>(q[i].opt == <span class="number">3</span>) q[i].y = quick_power(q[i].x, mod - <span class="number">2</span>);</span><br><span class="line">        <span class="keyword">if</span>(q[i].opt == <span class="number">5</span>) now = <span class="built_in">std</span>::lower_bound(d + <span class="number">1</span>, d + tot + <span class="number">1</span>, q[i].x) - d,</span><br><span class="line">                          q[i].x = (d[now] == q[i].x) ? now : <span class="number">0</span>;</span><br><span class="line">    &#125; mul = inv = <span class="number">1</span>; add = sum = <span class="number">0</span>;</span><br><span class="line">    FOR(i, <span class="number">1</span>, T, <span class="number">1</span>) &#123;</span><br><span class="line">        FOR(j, <span class="number">1</span>, m, <span class="number">1</span>) &#123;</span><br><span class="line">            now = (A[i] + <span class="number">1l</span>l * j * B[i] % m) % m + <span class="number">1</span>;</span><br><span class="line">            solve(q[now].opt, q[now].x, q[now].y);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ans = (ans % mod + mod) % mod; <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h1>
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Solutions/" rel="tag"># Solutions</a>
+          
+            <a href="/tags/SDOI/" rel="tag"># SDOI</a>
+          
+            <a href="/tags/%E7%A5%9E%E5%A5%87%E7%9A%84%E8%A7%A3%E6%B3%95/" rel="tag"># 神奇的解法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/19/LuoguP3758-5789/" rel="next" title="LuoguP3758/P5789「TJOI2017」题解">
+                <i class="fa fa-chevron-left"></i> LuoguP3758/P5789「TJOI2017」题解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/qwqwq.jpg"
+                alt="Cotoliqwq"/>
+            
+              <p class="site-author-name" itemprop="name">Cotoliqwq</p>
+              <div class="site-description motion-element" itemprop="description">我们称之为路的，其实不过是彷徨。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">77</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Herself32" title="GitHub &rarr; https://github.com/Herself32" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/Herself32@outlook.com" title="E-Mail &rarr; Herself32@outlook.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Samples"><span class="nav-number">2.</span> <span class="nav-text">Samples</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Input-1"><span class="nav-number">2.1.</span> <span class="nav-text">Input #1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Output-1"><span class="nav-number">2.2.</span> <span class="nav-text">Output #1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">3.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#THE-END"><span class="nav-number"></span> <span class="nav-text">THE END</span></a></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cotoliqwq</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  <script>
+    ;((d, w) => {
+      loadThree = () => {
+        let s = d.createElement('script');
+        s.src = '/lib/three/three.min.js';
+        d.body.appendChild(s);
+      }
+      let styles = ['', '', ''];
+      loadStyle = () => {
+        styles.forEach(x => {
+          if (x !== '') {
+            let s = d.createElement('script');
+            s.src = x;
+            d.body.appendChild(s);
+          }
+        })
+      }
+      w.addEventListener('DOMContentLoaded', loadThree);
+      w.addEventListener('load', loadStyle);
+    })(document, window);
+  </script>
+
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

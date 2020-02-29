@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <meta name="description" content="微分中值定理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微分中值定理学习笔记">
+<meta property="og:url" content="http://yoursite.com/2019/07/15/RolleTheorme/index.html">
+<meta property="og:site_name" content="Cotoliqwq&#39;s Blog">
+<meta property="og:description" content="微分中值定理">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-07-15T02:30:36.000Z">
+<meta property="article:modified_time" content="2019-08-12T07:57:37.000Z">
+<meta property="article:author" content="Cotoliqwq">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="数学&#x2F;数论">
+<meta property="article:tag" content="高等数学">
+<meta property="article:tag" content="微分">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/07/15/RolleTheorme/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>微分中值定理学习笔记 | Cotoliqwq's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cotoliqwq's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">呜咽, 在风中作陪</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-友链">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/links/" rel="section"><i class="menu-item-icon fa fa-fw fa-link"></i> <br/>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-模板">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/templates/" rel="section"><i class="menu-item-icon fa fa-fw fa-code"></i> <br/>模板</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/15/RolleTheorme/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cotoliqwq"/>
+      <meta itemprop="description" content="我们称之为路的，其实不过是彷徨。"/>
+      <meta itemprop="image" content="/images/qwqwq.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cotoliqwq's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">微分中值定理学习笔记
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-15 10:30:36" itemprop="dateCreated datePublished" datetime="2019-07-15T10:30:36+08:00">2019-07-15</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-12 15:57:37" itemprop="dateModified" datetime="2019-08-12T15:57:37+08:00">2019-08-12</time>
+              </span>
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br/>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>微分中值定理</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="https://jingyan.baidu.com/article/8cdccae92dfa14315413cd03.html" target="_blank" rel="noopener">高等数学：罗尔定理 - 百度经验</a></li>
+<li><a href="https://baike.baidu.com/item/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86/1876030?fr=aladdin" target="_blank" rel="noopener">百度百科 - 拉格朗日中值定理</a></li>
+</ul>
+<h2 id="罗尔定理"><a href="#罗尔定理" class="headerlink" title="罗尔定理"></a>罗尔定理</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>菜鸡Herself32买了一本微积分入门，但是他看着看着极限就自闭了，于是来氵后面的微分中值定理<del>接着自闭</del>.</p>
+<p>于是她就接触到了这个玄学的罗尔定理。</p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>罗尔定理告诉我们，如果一个函数$f(x)$在$[a,b]$上连续，在$(a,b)$上可导，</p>
+<p>并且$f(a) = f(b)$,那么在区间$(a,b)$上至少存在一个点，即$\exists \xi, a &lt; \xi &lt; b$,使得：</p>
+<p>$$f^\prime (\xi) = 0$$</p>
+<p><del>窒息×1</del></p>
+<p>通俗一点的解释就是：</p>
+<p>如果在区间$[a,b]$上连续的函数$f(x)$的两个端点函数值相等，并且在这个函数的图像上，每个点的切线都唯一（即可导），</p>
+<p>那么在这个区间内至少存在一点，使得它的切线与x轴平行（即导数等于0）。</p>
+<h3 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h3><p>在区间$[a,b]$上一定存在最大值$M$和最小值$m$</p>
+<p>若$M = m$，那么$f(x)$在$[a,b]$上是一个常数函数$f(x) = M \;\;x \in [a,b]$</p>
+<p>所以这时$f ^ \prime (x) = 0$在$[a,b]$上恒成立，定理得证。</p>
+<p>若$M \not = m$,又$f(a) = f(b)$。</p>
+<p>那么显然最大值和最小值不可能同时处于端点处.</p>
+<p>我们不妨设$M \not = f(a)$,那么$M$必定在$(a,b)$内被取得。</p>
+<p>我们设$f(\xi) = M\;\; (a &lt; \xi &lt; b)$,那么:</p>
+<p>$$\because f(\xi + \Delta x) \leq f(\xi)$$</p>
+<p>$$f(\xi +\Delta x) - f(\xi) \leq 0$$</p>
+<p>因为$f ^ \prime$存在，所以：</p>
+<p>$$f ^ \prime (\xi) = \lim_{\Delta x \to 0} \frac {f(\xi + \Delta x) - f(\xi)}{\Delta x}$$</p>
+<p>这个式子也存在。</p>
+<p>然后我们用一下夹逼准则去靠近：</p>
+<p>若$\Delta x &lt; 0$，那么$\frac {f(\xi + \Delta x) - f(\xi)}{\Delta x} \geq 0$</p>
+<p>$$\therefore f_-^\prime(\xi) = \lim_{\Delta x \to 0^-} \frac {f(\xi + \Delta x) - f(\xi)}{\Delta x} \geq 0$$</p>
+<p>若$\Delta x &gt; 0$，那么$\frac {f(\xi + \Delta x) - f(\xi)}{\Delta x} \leq 0$</p>
+<p>$$\therefore f_+^\prime(\xi) = \lim_{\Delta x \to 0^+} \frac {f(\xi + \Delta x) - f(\xi)}{\Delta x} \leq 0$$</p>
+<p>$$\therefore f_-^\prime(\xi) = f_+^\prime(\xi) = 0$$</p>
+<p>$$f ^ \prime (\xi) = 0$$</p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>证毕。</p>
+<h4 id="例1"><a href="#例1" class="headerlink" title="例1"></a>例1</h4><p>已知函数$f(x) = (x-1)(x-2)(x-3)(x-4)$,求$f^\prime(x)$有几个根并指出他们所处的区间。</p>
+<hr>
+<p><del>说求导的给我滚一边去</del></p>
+<p>显然，$f(x)$在$\mathbb{R}$上可导，并且满足$f(1) = f(2) = f(3) = f(4) = 0$</p>
+<p>那么$f(x)$在$[1,2],[2,3],[3,4]$三个区间上满足罗尔定理的条件。</p>
+<p>因此至少存在$\xi_1 \in [1,2], \xi_2 \in [2,3] ,\xi_3 \in [3,4]$使得:</p>
+<p>$$f^\prime(\xi_1) = f^\prime(\xi_2) = f^\prime(\xi_3) = 0$$</p>
+<p>又因为$f^\prime(x)$是三次函数，至多有三个根。</p>
+<p>他们分别位于$[1,2],[2,3],[3,4]$内。</p>
+<h4 id="例2"><a href="#例2" class="headerlink" title="例2"></a>例2</h4><p>设$f(x)$在$[a,b]$上连续，在$(a,b)$内可导，$m &lt; 0$且$f(a) = 0$。</p>
+<p>证明：<br>$$\exists \xi \in (a,b), f(\xi) = \frac {b - \xi}{m} f^\prime (\xi)$$</p>
+<hr>
+<p>对于这类题目，我们首先构造一个函数：</p>
+<p>分析一下题目里给的东西：</p>
+<p>$$f(\xi) = \frac {b - \xi}{m} f^\prime (\xi)$$</p>
+<p>这个$\xi$看着有点不爽，我们把他换成$x$</p>
+<p>$$f(x) = \frac {b - x}{m} f^\prime (x)$$</p>
+<p>开始化简：</p>
+<p>$$\frac {f^\prime (x)}{f(x)} = \frac {m}{b-x}$$</p>
+<p>然后依旧是上面那个套路:</p>
+<p>$$\ln f(x) = -m \ln (b-x) + C$$</p>
+<p>$$\ln f(x) + m \ln (b-x) = C$$</p>
+<p>$$\ln f(x) + \ln (b-x)^m = C$$</p>
+<p>$$\ln f(x)(b-x)^m = C$$</p>
+<p>然后这个$F(x) = f(x)(b-x)^m$就是我们需要构造的函数。</p>
+<p>然后我们验证一下端点函数值是否相等：</p>
+<p>$$F(a) = f(a) \times (b-a)^m = 0 \;\; F(b) - f(b) \times (b-b)^m = 0$$</p>
+<p>然后我们根据罗尔定理，得到：</p>
+<p>$$\exists \xi \in (a,b),F^\prime(\xi) = -m(b-\xi)^{m-1}f(\xi)+(b-\xi)^m f^\prime(\xi) = 0$$</p>
+<p>把这个玄学的东西整理一下，就是：</p>
+<p>$$m(b-\xi)^{m-1} f(\xi) = (b-\xi)^m f^\prime(\xi)$$</p>
+<p>$$\therefore f(\xi) = \frac {b - \xi}{m} f^\prime (\xi)$$</p>
+<p>所以，$\xi$即为所求。</p>
+<h2 id="Upd-拉格朗日中值定理"><a href="#Upd-拉格朗日中值定理" class="headerlink" title="Upd: 拉格朗日中值定理"></a>Upd: 拉格朗日中值定理</h2><p>在菜鸡Herself32正式学完罗尔定理11Days之后,她觉得这篇文章还是too simple了,为了不让这篇文章太naive,她决定把微分中值定理的相关内容全部扔上去.</p>
+<p>因为Herself32实在是太菜,例题会非常水（神仙轻喷啊QwQ,文章中的公式和证明可能会有问题,也请各位神仙多多包容并指正.</p>
+<p>首先更一篇拉格朗日中值定理吧qwq</p>
+<h3 id="定理概述"><a href="#定理概述" class="headerlink" title="定理概述"></a>定理概述</h3><p>其实拉格朗日中值定理是罗尔定理的推广.</p>
+<p>考虑如果函数$f(x)$满足在$[a,b]$上连续，在$(a,b)$上可导:</p>
+<p>那么在开区间$(a,b)$内至少有一点$\varepsilon (a &lt; \varepsilon &lt; b)$使得等式$f(b) - f(a) = f^\prime (\varepsilon)(b - a)$</p>
+<h4 id="其他形式"><a href="#其他形式" class="headerlink" title="其他形式"></a>其他形式</h4><p>记$\varepsilon = a + \theta (b - a) \; (0 &lt; \theta &lt; 1)$,我们令$a = x,b = x + \Delta x$,则有:</p>
+<p>$$\Delta y = f(x + \Delta x) - f(x) = f^\prime (x + \theta \Delta x) \cdot \Delta x$$</p>
+<p>上式称为<strong>有限增量公式</strong></p>
+<p>那么有限增量公式有什么意义呢?</p>
+<p>我们知道函数的微分${\rm d}y = f^\prime (x) \Delta x$,是函数的增量Δy的近似表达式.一般情况下只有当$|\Delta x|$很小的时候，${\rm d}y$和$\Delta y$之间的近似度才会提高；而有限增量公式却给出了当自变量x取得有限增量$\Delta x$（$|\Delta x|$不一定很小）时，函数增量$\Delta y$的准确表达式.</p>
+<h3 id="证明-1"><a href="#证明-1" class="headerlink" title="证明"></a>证明</h3><p>首先函数$f(x)$满足在$[a,b]$上连续，在$(a,b)$上可导:</p>
+<p>那么我们构造函数$g(x) = f(x) - f(a) - \frac {f(b) - f(a)}{b-a} (x - a)$</p>
+<p>首先显然$g(a) = g(b)$,并且$g(x)$满足在$[a,b]$上连续，在$(a,b)$上可导:</p>
+<p>那么根据之前讲过的罗尔定理可得,一定存在一点$\xi \in (a,b)$,使得$g^\prime(\xi) = 0$</p>
+<p>那么可以得到$g^\prime(\xi) = f^\prime(\xi) - \frac {f(b) - f(a)}{b-a} = 0$</p>
+<p>变形可得$(b) - f(a) = f^\prime (\xi)(b - a)$, 证毕.</p>
+<h3 id="推广"><a href="#推广" class="headerlink" title="推广"></a>推广</h3><p>如果$f(x)$满足在区间$[a,b]$上的导数恒为$0$,那么$f(x)$在$[a,b]$上是常数函数.</p>
+<p>证明应该比较显然吧.</p>
+<p>考虑在区间$[a,b]$上任取两个点$\xi_1,\xi_2$,我们直接套上拉格朗日中值定理,可得:</p>
+<p>$$f(\xi_2) - f(\xi_1) = f^\prime(\varepsilon)(\xi_2 - \xi_1) (\xi_1 &lt; \varepsilon &lt; \xi_2)$$</p>
+<p>已知$f^\prime(\varepsilon) = 0$,那么也就是$f(\xi_2) - f(\xi_1) = 0$.</p>
+<p>所以$f(\xi_1) = f(\xi_2)$,证毕.</p>
+<h3 id="关于有限增量公式"><a href="#关于有限增量公式" class="headerlink" title="关于有限增量公式"></a>关于有限增量公式</h3><p>若$f’’(x)$在$x_0$点处连续,且$$f’’(x_0) \not = 0$$,那么:</p>
+<p>$$\lim_{\Delta x \to 0} \theta = \frac 12$$</p>
+<p>证明:<br>因为$f’’(x)$在$x_0$处连续,我们根据泰勒公式可得</p>
+<ul>
+<li><p>$f(x_0 + \Delta x) = f(x_0) + f’(x_0) \Delta x + \frac {f’’(x_0+\theta_1 \Delta x)}{2!} (\Delta x)^2$</p>
+</li>
+<li><p>$f(x_0 + \theta \Delta x) = f’(x_0) + f’’[x_0+\theta_2(\theta \Delta x)] (\theta \Delta x)$</p>
+</li>
+</ul>
+<p>我们将两个柿子分别带入有限增量公式,可得:</p>
+<p>$$\theta = \frac {f’’(x_0+\theta_1 \Delta x)}{2 f’’[x_0 + \theta_2(\theta \Delta x)]}$$</p>
+<p>在等式两边同取极限,令$\Delta x \to 0$,可得结论,证毕.</p>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h4 id="sb题-1"><a href="#sb题-1" class="headerlink" title="sb题 #1"></a>sb题 #1</h4><p>设$a &gt; b &gt; 0,n &gt; 1$,求证:</p>
+<p>$$nb^{n-1}(a-b) &lt; a^n - b^n &lt; na^{n-1}(a-b)$$</p>
+<p><del>这题太水了,请读者自行证明</del></p>
+<hr>
+<p>这题好像确实水了一点,好像被初一同学切了(?</p>
+<p>首先观察到$na^{n-1}$这个东西,并且还出现了两次,那么我们果断构造函数.</p>
+<p>设$f(x) = x^n$,那么显然$f’(x) = nx^{n-1}$</p>
+<p>我们把$f(x)$扔进不等式里,就是$f’(b)(a-b) &lt; f(a) - f(b) &lt; f’(a)(a-b)$.</p>
+<p>显然$f(x)$在$[b,a]$上满足拉格朗日中值定理的条件.</p>
+<p>那么存在$\xi \in (b,a)$, 使得$f(a) - f(b) = f’(\xi)(a-b)$</p>
+<p>又因为$b &lt;  \xi &lt; a$,证毕.</p>
+<h4 id="sb题-2"><a href="#sb题-2" class="headerlink" title="sb题 #2"></a>sb题 #2</h4><p>证明当$x &gt; 0$时，$\frac {x}{1+x} &lt; \ln (1 + x) &lt; x$</p>
+<p><del>这题太水了,请读者自行证明</del></p>
+<hr>
+<p>好像还是很水…….,没感觉到任何难度</p>
+<p>首先骤然发现$\frac {x}{1+x}$和$\ln (1 + x)$这个东西,那么继续果断构造函数</p>
+<p>设$f(x) = \ln (1 + x)$,显然$f(x)$在$[0,x]$上满足拉格朗日中值定理的条件.</p>
+<p>那么根据拉格朗日中值定理,可得$f(x) - f(0) = xf’(\xi) \quad \xi \in (0,x)$</p>
+<p>化简一下上式,可得$\ln (1 + x) = \frac {x}{1 + \xi}$</p>
+<p>因为$\xi \in (0,x)$:</p>
+<p>$$\frac {x}{1+x} &lt; \frac {x}{1 + \xi} &lt; x$$</p>
+<p>$$\text{代入可得} \frac {x}{1+x} &lt; \ln (1 + x) &lt; x$$</p>
+<p>证毕.</p>
+<h3 id="正常题"><a href="#正常题" class="headerlink" title="正常题"></a>正常题</h3><p>设$f(x)$在$[0,1]$上连续</p>
+<h1 id="To-be-countinue"><a href="#To-be-countinue" class="headerlink" title="To be countinue"></a>To be countinue</h1>
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/%E6%95%B0%E5%AD%A6-%E6%95%B0%E8%AE%BA/" rel="tag"># 数学/数论</a>
+          
+            <a href="/tags/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/" rel="tag"># 高等数学</a>
+          
+            <a href="/tags/%E5%BE%AE%E5%88%86/" rel="tag"># 微分</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/13/Mobius/" rel="next" title="Mobius反演学习笔记">
+                <i class="fa fa-chevron-left"></i> Mobius反演学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/18/ZROI2019-07-17Contest/" rel="prev" title="ZROI2019/07/17CD班统考摸底赛题解">
+                ZROI2019/07/17CD班统考摸底赛题解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/qwqwq.jpg"
+                alt="Cotoliqwq"/>
+            
+              <p class="site-author-name" itemprop="name">Cotoliqwq</p>
+              <div class="site-description motion-element" itemprop="description">我们称之为路的，其实不过是彷徨。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">77</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Herself32" title="GitHub &rarr; https://github.com/Herself32" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/Herself32@outlook.com" title="E-Mail &rarr; Herself32@outlook.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#罗尔定理"><span class="nav-number">2.</span> <span class="nav-text">罗尔定理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">2.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">2.2.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#证明"><span class="nav-number">2.3.</span> <span class="nav-text">证明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用"><span class="nav-number">2.4.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#例1"><span class="nav-number">2.4.1.</span> <span class="nav-text">例1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例2"><span class="nav-number">2.4.2.</span> <span class="nav-text">例2</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Upd-拉格朗日中值定理"><span class="nav-number">3.</span> <span class="nav-text">Upd: 拉格朗日中值定理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定理概述"><span class="nav-number">3.1.</span> <span class="nav-text">定理概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#其他形式"><span class="nav-number">3.1.1.</span> <span class="nav-text">其他形式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#证明-1"><span class="nav-number">3.2.</span> <span class="nav-text">证明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#推广"><span class="nav-number">3.3.</span> <span class="nav-text">推广</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于有限增量公式"><span class="nav-number">3.4.</span> <span class="nav-text">关于有限增量公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例题"><span class="nav-number">3.5.</span> <span class="nav-text">例题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#sb题-1"><span class="nav-number">3.5.1.</span> <span class="nav-text">sb题 #1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sb题-2"><span class="nav-number">3.5.2.</span> <span class="nav-text">sb题 #2</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正常题"><span class="nav-number">3.6.</span> <span class="nav-text">正常题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#To-be-countinue"><span class="nav-number"></span> <span class="nav-text">To be countinue</span></a></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cotoliqwq</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  <script>
+    ;((d, w) => {
+      loadThree = () => {
+        let s = d.createElement('script');
+        s.src = '/lib/three/three.min.js';
+        d.body.appendChild(s);
+      }
+      let styles = ['', '', ''];
+      loadStyle = () => {
+        styles.forEach(x => {
+          if (x !== '') {
+            let s = d.createElement('script');
+            s.src = x;
+            d.body.appendChild(s);
+          }
+        })
+      }
+      w.addEventListener('DOMContentLoaded', loadThree);
+      w.addEventListener('load', loadStyle);
+    })(document, window);
+  </script>
+
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

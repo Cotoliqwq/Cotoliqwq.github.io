@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <meta name="description" content="“做多项式题就像嗑药，出多项式题就像贩毒。” —— 某福建知名OI选手">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多项式基础操作学习笔记">
+<meta property="og:url" content="http://yoursite.com/2019/09/28/Simple-Poly-Operations/index.html">
+<meta property="og:site_name" content="Cotoliqwq&#39;s Blog">
+<meta property="og:description" content="“做多项式题就像嗑药，出多项式题就像贩毒。” —— 某福建知名OI选手">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-09-28T14:08:56.000Z">
+<meta property="article:modified_time" content="2019-09-28T14:15:04.000Z">
+<meta property="article:author" content="Cotoliqwq">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="数学&#x2F;数论">
+<meta property="article:tag" content="多项式相关">
+<meta property="article:tag" content="卷积相关">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/09/28/Simple-Poly-Operations/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>多项式基础操作学习笔记 | Cotoliqwq's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cotoliqwq's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">呜咽, 在风中作陪</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-友链">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/links/" rel="section"><i class="menu-item-icon fa fa-fw fa-link"></i> <br/>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-模板">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/templates/" rel="section"><i class="menu-item-icon fa fa-fw fa-code"></i> <br/>模板</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/28/Simple-Poly-Operations/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cotoliqwq"/>
+      <meta itemprop="description" content="我们称之为路的，其实不过是彷徨。"/>
+      <meta itemprop="image" content="/images/qwqwq.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cotoliqwq's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">多项式基础操作学习笔记
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-09-28 22:08:56 / 修改时间：22:15:04" itemprop="dateCreated datePublished" datetime="2019-09-28T22:08:56+08:00">2019-09-28</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br/>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>“做多项式题就像嗑药，出多项式题就像贩毒。” —— 某福建知名OI选手</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="前置知识与约定"><a href="#前置知识与约定" class="headerlink" title="前置知识与约定"></a>前置知识与约定</h3><ul>
+<li>多项式乘法,我们可以用<code>FFT/NTT</code>解决.</li>
+<li>简单求导/微积分(<del>简单的意思是如果这都不会就不要说自己学过了</del>)</li>
+<li>$[P]$表示艾弗森括号,当$P$为真时表达式的值为$1$，$P$为假时表达式的值为$0$</li>
+<li>$\Gamma$表示阶乘函数, $e$表示自然底数</li>
+<li>$f^{(n)}$表示函数$f(x)$的$n$阶导函数</li>
+</ul>
+<h3 id="多项式乘法"><a href="#多项式乘法" class="headerlink" title="多项式乘法"></a>多项式乘法</h3><p>我们可以用<code>FFT/NTT</code>在$\mathcal O(n \log n)$的时间内解决, 但两者优劣势不尽相同.</p>
+<p> <code>FFT</code>的缺点在于使用复数,精度差,使用单位根,常数大等.</p>
+<p>而<code>NTT</code>的缺点在于必须在模数的原根较特殊的情况下才能使用(如$998244353$等).</p>
+<h4 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">NTT</span><span class="params">(<span class="keyword">int</span> *f, <span class="keyword">int</span> type)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) <span class="keyword">if</span>(i &lt; rev[i]) <span class="built_in">std</span>::swap(f[i], f[rev[i]]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i &lt;&lt;= <span class="number">1</span>) &#123;</span><br><span class="line">		<span class="keyword">int</span> tk = quick_power(<span class="number">3</span>, (mod - <span class="number">1</span>) / (i &lt;&lt; <span class="number">1</span>));</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j += (i &lt;&lt; <span class="number">1</span>)) &#123;</span><br><span class="line">			<span class="keyword">int</span> t = <span class="number">1</span>, x, y;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; i; ++k, t = <span class="number">1l</span>l * t * tk % mod) &#123;</span><br><span class="line">				x = f[j + k], y = <span class="number">1l</span>l * t * f[j + k + i] % mod;</span><br><span class="line">				f[j + k] = (x + y) % mod; f[j + k + i] = (x - y + mod) % mod;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(type == <span class="number">1</span>) <span class="keyword">return</span> ;</span><br><span class="line">	<span class="keyword">int</span> inv = quick_power(n, mod - <span class="number">2</span>);</span><br><span class="line">	<span class="built_in">std</span>::reverse(f + <span class="number">1</span>, f + n);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) f[i] = <span class="number">1l</span>l * f[i] * inv % mod;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多项式泰勒展开"><a href="#多项式泰勒展开" class="headerlink" title="多项式泰勒展开"></a>多项式泰勒展开</h3><p>如果函数$f(x)$在$x_0$处存在$n$阶导数,那么定义$f(x)$在$x = x_0$处的$\rm Taylor$展开式为:</p>
+<p>$$f(x) = \sum_{i=0}^n \frac {f^{(n)}(x_0)}{\Gamma(i)} (x - x_0)^i + R_n(x)$$</p>
+<p>其中$R_n(x)$表示拉格朗日余项,即$(x - x_0)^n$的高阶无穷小.</p>
+<p>一个例子:$e^x = 1 + \frac {x}{\Gamma(1)} + \frac {x^2}{\Gamma(2)} + \cdots$</p>
+<h3 id="多项式牛顿迭代"><a href="#多项式牛顿迭代" class="headerlink" title="多项式牛顿迭代"></a>多项式牛顿迭代</h3><p>牛顿迭代可以用来求函数的零点,而多项式牛顿迭代可以求多项式函数的零点.</p>
+<p>即对于一个多项式$F(x)$, 求一个多项式$G_k(x)$满足$F(G_k(x)) \equiv 0 \pmod{2^k}$</p>
+<p>假设我们已经求出了$G_{k-1}(x)$,考虑如何推得$G_k(x)$</p>
+<p>我们把$F(G_k(x))$在$x = G_{k-1}(x)$处进行$\rm Taylor$展开,可以得到:</p>
+<p>$$F(G_k(x)) = F(G_{k-1}(x)) + \frac {F’(G_{k-1}(x))}{\Gamma(1)} (G_k(x) - G_{k-1}(x))$$</p>
+<p>化简,移项得:</p>
+<p>$$G_k(x) = G_{k-1}(x) - \frac {F(G_{k-1}(x))}{F’(G_{k-1}(x))}$$</p>
+<h3 id="多项式求逆"><a href="#多项式求逆" class="headerlink" title="多项式求逆"></a>多项式求逆</h3><p>已知$F(x)$,求$G(x)$满足$F(x)G(x) \equiv 1 \pmod{x^n}$</p>
+<p>和推牛顿迭代的式子一样,我们假设已经求出了$G_0(x)$满足:</p>
+<p>$$F(x)G_0(x) \equiv 1 \pmod{x^{\lfloor \frac {2}{n}\rfloor}}$$</p>
+<p>由题目条件可得:</p>
+<p>$$F(x)G(x) \equiv 1 \pmod{x^{\lfloor \frac {2}{n}\rfloor}}$$</p>
+<p>上下两式相减可得:</p>
+<p>$$F(x)G_0(x) - F(x)G(x) \equiv 0 \pmod{x^{\lfloor \frac {2}{n}\rfloor}}$$</p>
+<p>同余式两边同时除以$F(x)$可得:</p>
+<p>$$G_0(x) - G(x) \equiv 0 \pmod{x^{\lfloor \frac {2}{n}\rfloor}}$$</p>
+<p>同余式两遍平方可得:</p>
+<p>$$G_0(x)^2 - 2G(x)G_0(x) + G(x)^2 \equiv 0 \pmod{x^n}$$</p>
+<p>由题目条件,同余时两边同时乘$F(x)$得:</p>
+<p>$$F(x)G_0(x)^2 - 2G_0(x) + G(x) \equiv 0 \pmod{x^n}$$</p>
+<p>把式子移项,可得:</p>
+<p>$$G(x) = 2G_0(x) - F(x)G_0(x)^2 \equiv 0 \pmod{x^n}$$</p>
+<p>递归求解即可.</p>
+<h4 id="Code-1"><a href="#Code-1" class="headerlink" title="Code"></a>Code</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">PolyInv</span><span class="params">(<span class="keyword">int</span> *f, <span class="keyword">int</span> *g, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(len == <span class="number">1</span>) &#123;g[<span class="number">0</span>] = quick_power(f[<span class="number">0</span>], mod - <span class="number">2</span>); <span class="keyword">return</span> ;&#125;</span><br><span class="line">	PolyInv(f, g, (len + <span class="number">1</span>) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">	n = <span class="number">1</span>, m = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(n &lt; (len &lt;&lt; <span class="number">1</span>)) &#123;n &lt;&lt;= <span class="number">1</span>; ++m;&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i) rev[i] = (rev[i &gt;&gt; <span class="number">1</span>] &gt;&gt; <span class="number">1</span>) | ((i &amp; <span class="number">1</span>) &lt;&lt; (m - <span class="number">1</span>));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i) c[i] = f[i];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = len; i &lt; n; ++i) c[i] = <span class="number">0</span>;</span><br><span class="line">	NTT(c, <span class="number">1</span>); NTT(g, <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) g[i] = <span class="number">1l</span>l * (<span class="number">2</span> - <span class="number">1l</span>l * c[i] * g[i] % mod + mod) % mod * g[i] % mod;</span><br><span class="line">	NTT(g, <span class="number">-1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = len; i &lt; n; ++i) g[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多项式求导"><a href="#多项式求导" class="headerlink" title="多项式求导"></a>多项式求导</h3><p>没啥好说的吧, 给出公式:</p>
+<p>$$x^{a^{\prime}} = ax^{a-1}$$</p>
+<h4 id="Code-2"><a href="#Code-2" class="headerlink" title="Code"></a>Code</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">PolyDer</span><span class="params">(<span class="keyword">int</span> *f, <span class="keyword">int</span> *g, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; len; ++i) g[i - <span class="number">1</span>] = <span class="number">1l</span>l * i * f[i] % mod;</span><br><span class="line">	g[len - <span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多项式积分"><a href="#多项式积分" class="headerlink" title="多项式积分"></a>多项式积分</h3><p>根据牛顿-莱布尼兹公式:</p>
+<p>$$\int x^a {\rm d}x = \frac {1}{a+1} x^{a+1}$$</p>
+<h4 id="Code-3"><a href="#Code-3" class="headerlink" title="Code"></a>Code</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">PolyInt</span><span class="params">(<span class="keyword">int</span> *f, <span class="keyword">int</span> *g, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; len; ++i) g[i] = <span class="number">1l</span>l * f[i - <span class="number">1</span>] * quick_power(i, mod - <span class="number">2</span>) % mod;</span><br><span class="line">	g[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多项式对数函数"><a href="#多项式对数函数" class="headerlink" title="多项式对数函数"></a>多项式对数函数</h3><p>即多项式求<a href="https://www.luogu.org/problem/P4725" target="_blank" rel="noopener">$\ln$</a></p>
+<p>已知$F(x)$,求$G(x)$满足$G(x) \equiv \ln F(x) \pmod{x^n}$</p>
+<p>设函数$H(x) = \ln x$,那么同余式右边即为$H(F(x))$.</p>
+<p>考虑将同余式两边求导,可得:</p>
+<p>$$G’(x) \equiv  H’(x)  \pmod{x^n}$$</p>
+<p>即:</p>
+<p>$$G’(x) \equiv \frac{F’(x)}{F(x)} \pmod{x^n}$$</p>
+<p>那么我们把$F(x)$求个导,再求个逆,然后把得到的两个多项式求一下卷积.</p>
+<p>这样我们得到的是$G’(x)$,然后再把他积回去即可.</p>
+<h4 id="Code-4"><a href="#Code-4" class="headerlink" title="Code"></a>Code</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">PolyLn</span><span class="params">(<span class="keyword">int</span> *f, <span class="keyword">int</span> *g, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">	PolyDer(f, a, len); PolyInv(f, b, len);</span><br><span class="line">	n = <span class="number">1</span>; m = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(n &lt; (len &lt;&lt; <span class="number">1</span>)) &#123;n &lt;&lt;= <span class="number">1</span>; ++m;&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i) rev[i] = (rev[i &gt;&gt; <span class="number">1</span>] &gt;&gt; <span class="number">1</span>) | ((i &amp; <span class="number">1</span>) &lt;&lt; (m - <span class="number">1</span>));</span><br><span class="line">	NTT(a, <span class="number">1</span>); NTT(b, <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) a[i] = <span class="number">1l</span>l * a[i] * b[i] % mod;</span><br><span class="line">	NTT(a, <span class="number">-1</span>); PolyInt(a, g, len);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多项式指数函数"><a href="#多项式指数函数" class="headerlink" title="多项式指数函数"></a>多项式指数函数</h3><p>即多项式求<a href="https://www.luogu.org/problem/P4726" target="_blank" rel="noopener">$\rm exp$</a></p>
+<p>已知$F(x)$,求$G(x)$满足$G(x) \equiv \exp (F(x)) \pmod{x^n}$.</p>
+<p>考虑同余式两边同时取自然对数:</p>
+<p>$$\ln G(x) \equiv F(x) \pmod{x^n}$$</p>
+<p>移项,可得:</p>
+<p>$$\ln G(x) - F(x) \equiv 0 \pmod{x^n}$$</p>
+<p>将这个式子套进 <code>多项式牛顿迭代</code> 可得:</p>
+<p>$$G(x) \equiv G_0(x) - \frac {\ln G_0(x) - F(x)}{\frac {1}{G_0(x)}}$$</p>
+<p>化简可得:</p>
+<p>$$G(x) \equiv G_0(x) - (\ln G_0(x) - F(x)) \times G_0(x) \pmod {x^n}$$</p>
+<p>$$G(x) \equiv G_0(x) \times (1 - \ln G_0(x) + F(x)) \pmod {x^n}$$</p>
+<p>递归+<code>多项式Ln</code>计算即可.</p>
+<h4 id="Code-5"><a href="#Code-5" class="headerlink" title="Code"></a>Code</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">PolyExp</span><span class="params">(<span class="keyword">int</span> *f, <span class="keyword">int</span> *g, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(len == <span class="number">1</span>) &#123;g[<span class="number">0</span>] = <span class="number">1</span>; <span class="keyword">return</span> ;&#125;</span><br><span class="line">	PolyExp(f, g, (len + <span class="number">1</span>) &gt;&gt; <span class="number">1</span>);</span><br><span class="line">	n = <span class="number">1</span>; m = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(n &lt; (len &lt;&lt; <span class="number">1</span>)) &#123;n &lt;&lt;= <span class="number">1</span>; ++m;&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i) rev[i] = (rev[i &gt;&gt; <span class="number">1</span>] &gt;&gt; <span class="number">1</span>) | ((i &amp; <span class="number">1</span>) &lt;&lt; (m - <span class="number">1</span>));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; (len &lt;&lt; <span class="number">1</span>); ++i) d[i] = e[i] = <span class="number">0</span>;</span><br><span class="line">	PolyLn(g, d, len); </span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i) e[i] = f[i];</span><br><span class="line">	NTT(g, <span class="number">1</span>); NTT(d, <span class="number">1</span>); NTT(e, <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) g[i] = (<span class="number">1l</span>l - d[i] + e[i] + mod) * g[i] % mod;</span><br><span class="line">	NTT(g, <span class="number">-1</span>); </span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = len; i &lt; n; ++i) g[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多项式快速幂"><a href="#多项式快速幂" class="headerlink" title="多项式快速幂"></a>多项式快速幂</h3><p>已知$F(x)$,求$G(x)$满足$G(x) \equiv F(x)^k \pmod{x^n}$</p>
+<p>首先我们在初中阶段就应该学过这样一个式子:</p>
+<p>$$\log_a b^k = k \log_a b$$</p>
+<p>这个式子对多项式也成立,</p>
+<p>那么我们只需要把$F(x)$求一个$\ln$,然后把它乘上$k$,最后再$\exp$回去即可.</p>
+<h4 id="Code-6"><a href="#Code-6" class="headerlink" title="Code"></a>Code</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">PolyPow</span><span class="params">(<span class="keyword">int</span> *f, <span class="keyword">int</span> *g, <span class="keyword">int</span> k, <span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">	PolyLn(f, h, len);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i) h[i] = <span class="number">1l</span>l * h[i] * k % mod;</span><br><span class="line">	PolyExp(h, g, len);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i) h[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="多项式开根"><a href="#多项式开根" class="headerlink" title="多项式开根"></a>多项式开根</h3><p>已知$F(x)$,求$G(x)$满足$G(x)^2 \equiv F(x) \pmod{x^n}$</p>
+<p>和多项式求逆类似,利用那个结论,得到:</p>
+<p>$$2 \ln G(x) \equiv \ln F(x) \pmod{x^n}$$</p>
+<p>那么我们先把$F(x)$求个$\ln$,然后把它的系数乘以$2$的逆元,最后再$\exp$回去即可.</p>
+<h4 id="Code-7"><a href="#Code-7" class="headerlink" title="Code"></a>Code</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">PolySqr</span><span class="params">(<span class="keyword">int</span> *f, <span class="keyword">int</span> *g, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">	PolyLn(f, l, len);</span><br><span class="line">	<span class="keyword">int</span> invt = quick_power(<span class="number">2</span>, (mod - <span class="number">2</span>));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i) l[i] = <span class="number">1l</span>l * l[i] * invt % mod;</span><br><span class="line">	PolyExp(l, g, len);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i) l[i] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="更新日志-amp-引用"><a href="#更新日志-amp-引用" class="headerlink" title="更新日志&amp;引用"></a>更新日志&amp;引用</h3><ul>
+<li>2019/9/27, 更新至多项式求逆</li>
+<li>2019/9/28, 更新至多项式开根</li>
+<li>2019/9/28, To do 多项式除法&amp;取模</li>
+</ul>
+<p>作者是完完全全跟着<a href="https://venusnero.github.io/2019/03/19/poly_algorithm_note/" target="_blank" rel="noopener">Venus</a>和<a href="http://m-sea-blog.com/archives/3342/" target="_blank" rel="noopener">M-sea</a>大爷学的多项式,所以本篇文章有很多引用来自她们的博客.</p>
+<p> 再次感谢这两篇博客给予本菜鸡在多项式学习方面的帮助!</p>
+<p>摘要来自<a href="https://www.luogu.org/space/show?uid=115864" target="_blank" rel="noopener">NaCly_Fish</a>的Luogu个人空间.</p>
+<h1 id="To-be-continue"><a href="#To-be-continue" class="headerlink" title="To be continue"></a>To be continue</h1>
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/%E6%95%B0%E5%AD%A6-%E6%95%B0%E8%AE%BA/" rel="tag"># 数学/数论</a>
+          
+            <a href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E7%9B%B8%E5%85%B3/" rel="tag"># 多项式相关</a>
+          
+            <a href="/tags/%E5%8D%B7%E7%A7%AF%E7%9B%B8%E5%85%B3/" rel="tag"># 卷积相关</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/17/Sol-For-NOIP2013/" rel="next" title="NOIp2013题解">
+                <i class="fa fa-chevron-left"></i> NOIp2013题解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/29/LuoguP5147/" rel="prev" title="LuoguP5147题解">
+                LuoguP5147题解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/qwqwq.jpg"
+                alt="Cotoliqwq"/>
+            
+              <p class="site-author-name" itemprop="name">Cotoliqwq</p>
+              <div class="site-description motion-element" itemprop="description">我们称之为路的，其实不过是彷徨。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">77</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Herself32" title="GitHub &rarr; https://github.com/Herself32" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/Herself32@outlook.com" title="E-Mail &rarr; Herself32@outlook.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前置知识与约定"><span class="nav-number">1.</span> <span class="nav-text">前置知识与约定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式乘法"><span class="nav-number">2.</span> <span class="nav-text">多项式乘法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Code"><span class="nav-number">2.1.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式泰勒展开"><span class="nav-number">3.</span> <span class="nav-text">多项式泰勒展开</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式牛顿迭代"><span class="nav-number">4.</span> <span class="nav-text">多项式牛顿迭代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式求逆"><span class="nav-number">5.</span> <span class="nav-text">多项式求逆</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Code-1"><span class="nav-number">5.1.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式求导"><span class="nav-number">6.</span> <span class="nav-text">多项式求导</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Code-2"><span class="nav-number">6.1.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式积分"><span class="nav-number">7.</span> <span class="nav-text">多项式积分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Code-3"><span class="nav-number">7.1.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式对数函数"><span class="nav-number">8.</span> <span class="nav-text">多项式对数函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Code-4"><span class="nav-number">8.1.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式指数函数"><span class="nav-number">9.</span> <span class="nav-text">多项式指数函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Code-5"><span class="nav-number">9.1.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式快速幂"><span class="nav-number">10.</span> <span class="nav-text">多项式快速幂</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Code-6"><span class="nav-number">10.1.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多项式开根"><span class="nav-number">11.</span> <span class="nav-text">多项式开根</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Code-7"><span class="nav-number">11.1.</span> <span class="nav-text">Code</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新日志-amp-引用"><span class="nav-number">12.</span> <span class="nav-text">更新日志&amp;引用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#To-be-continue"><span class="nav-number"></span> <span class="nav-text">To be continue</span></a></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cotoliqwq</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  <script>
+    ;((d, w) => {
+      loadThree = () => {
+        let s = d.createElement('script');
+        s.src = '/lib/three/three.min.js';
+        d.body.appendChild(s);
+      }
+      let styles = ['', '', ''];
+      loadStyle = () => {
+        styles.forEach(x => {
+          if (x !== '') {
+            let s = d.createElement('script');
+            s.src = x;
+            d.body.appendChild(s);
+          }
+        })
+      }
+      w.addEventListener('DOMContentLoaded', loadThree);
+      w.addEventListener('load', loadStyle);
+    })(document, window);
+  </script>
+
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

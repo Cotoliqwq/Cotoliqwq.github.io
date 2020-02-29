@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <meta name="description" content="莫比乌斯反演是数论中的重要内容，在许多情况下能够简化运算。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mobius反演学习笔记">
+<meta property="og:url" content="http://yoursite.com/2019/07/13/Mobius/index.html">
+<meta property="og:site_name" content="Cotoliqwq&#39;s Blog">
+<meta property="og:description" content="莫比乌斯反演是数论中的重要内容，在许多情况下能够简化运算。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.ax1x.com/2019/07/13/ZhUGDJ.png">
+<meta property="article:published_time" content="2019-07-13T00:05:51.000Z">
+<meta property="article:modified_time" content="2020-01-19T13:21:57.819Z">
+<meta property="article:author" content="Cotoliqwq">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="数学&#x2F;数论">
+<meta property="article:tag" content="Mobius反演">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/07/13/ZhUGDJ.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/07/13/Mobius/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Mobius反演学习笔记 | Cotoliqwq's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cotoliqwq's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">呜咽, 在风中作陪</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-友链">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/links/" rel="section"><i class="menu-item-icon fa fa-fw fa-link"></i> <br/>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-模板">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/templates/" rel="section"><i class="menu-item-icon fa fa-fw fa-code"></i> <br/>模板</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/13/Mobius/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cotoliqwq"/>
+      <meta itemprop="description" content="我们称之为路的，其实不过是彷徨。"/>
+      <meta itemprop="image" content="/images/qwqwq.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cotoliqwq's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mobius反演学习笔记
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-13 08:05:51" itemprop="dateCreated datePublished" datetime="2019-07-13T08:05:51+08:00">2019-07-13</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-01-19 21:21:57" itemprop="dateModified" datetime="2020-01-19T21:21:57+08:00">2020-01-19</time>
+              </span>
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br/>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>莫比乌斯反演是数论中的重要内容，在许多情况下能够简化运算。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><p><a href="https://baike.baidu.com/item/%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%8F%8D%E6%BC%94/7348580?fr=aladdin" target="_blank" rel="noopener">百度百科 - Mobius反演</a></p>
+</li>
+<li><p><a href="http://inspiral.coding.me/2019/07/%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E5%8F%8D%E6%BC%94/#more" target="_blank" rel="noopener">莫比乌斯反演(从入门到自闭) - StructBottle ‘s Blog</a></p>
+</li>
+<li><p><a href="https://blog.aor.sd.cn/archives/412" target="_blank" rel="noopener">数论基础 - 莫比乌斯反演 - RainAir’s Blog</a></p>
+</li>
+<li><p><a href="https://blog.ishq.site" target="_blank" rel="noopener">基础数论函数及基本运算.pdf - By Shq</a></p>
+</li>
+</ul>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>以前曾经简单的看过Mobius反演的一些介绍，但是看的很不认真，趁着去ZR讲Mobius反演之前赶紧恶补一下qwq</p>
+<h2 id="前置知识和技巧"><a href="#前置知识和技巧" class="headerlink" title="前置知识和技巧"></a>前置知识和技巧</h2><h3 id="数论函数"><a href="#数论函数" class="headerlink" title="数论函数"></a>数论函数</h3><p>数论函数即定义域为$N^+$的函数</p>
+<h3 id="积性函数"><a href="#积性函数" class="headerlink" title="积性函数"></a>积性函数</h3><p>若对于任意一对正整数$a,b$,有$\gcd(a,b) = 1$,且$f(ab) = f(a) \times f(b)$,那么函数$f$称为不完全积性函数。</p>
+<p>完全积性函数的的要求就是把$\gcd(a,b) = 1$这个条件去掉</p>
+<h3 id="狄利克雷卷积"><a href="#狄利克雷卷积" class="headerlink" title="狄利克雷卷积"></a>狄利克雷卷积</h3><p>我们称$(f * g)(n)$是 <strong>数论函数</strong> $f,g$的狄利克雷卷积，那么有：</p>
+<p>$$(f * g)(n) = \sum_{d|n} f(d) g(\frac nd)$$</p>
+<h4 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h4><p>狄利克雷卷积运算满足交换律、结合律和分配律。</p>
+<p>交换律： $f * g = g * f$</p>
+<p>结合律: $f * (g * h) = (f * g) * h$</p>
+<p>分配律：$(f + g) * h = f * h + g * h$</p>
+<h4 id="单位元"><a href="#单位元" class="headerlink" title="单位元"></a>单位元</h4><p>定义数论函数$\varepsilon(n)=[n=1]$ 为狄利克雷卷积的单位元。</p>
+<p>$$(f * \varepsilon)(n) = (\varepsilon * f)(n) = \sum_{d|n} \varepsilon(d) f(\frac nd) = f(n)$$</p>
+<p>从上式可以看出：在狄利克雷卷积的意义下，单位元$\varepsilon$函数就相当于在实数意义下的$1$。</p>
+<h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><p>我们考虑求和函数：<br>$$F(n) = \sum_{d | n} f(d)$$</p>
+<p>手动计算一下$n$比较小时的情况，我们可以得到$f$和$F$之间的关系：</p>
+<p>当$n = p^2(p \in \rm{prime})$时，<br>$$F(p) = f(1) + f(p)$$<br>$$F(n) = f(1) + f(p) + f(n) = f(1) + f(p) + f(p^2)$$</p>
+<p>那么显然,<br>$$f(n) = F(n) - F(p) = F(p^2) - F(p)$$</p>
+<p>因为$\mu(p^2) = 0$,于是我们可以大胆的做出猜测：</p>
+<p>$$(\mu * F)(n) = f(n)$$</p>
+<h2 id="Mobius函数"><a href="#Mobius函数" class="headerlink" title="Mobius函数"></a>Mobius函数</h2><p>等等，那个$\mu$函数是什么意思？</p>
+<p>$\mu$函数就是俗称的$\rm Mobius$函数，它的定义式是这个样子的：</p>
+<p>$$\sum_{d|n} \mu(d) = [n = 1]$$</p>
+<p>其实就是：</p>
+<p>$$\mu * 1 = \varepsilon$$</p>
+<p>但为了方便，我们经常以这种方式定义$\rm Mobius$函数：</p>
+<p>求出$n$的缩系：$n = p_1^{a_1}p_2^{a_2}…p_{\varphi(n)}^{a_{\varphi(n)}}$</p>
+<p><img src="https://s2.ax1x.com/2019/07/13/ZhUGDJ.png" alt="ZhUGDJ.png"></p>
+<p>最后重要的一条，$\rm Mobius$函数是不完全积性函数。</p>
+<h2 id="Mobius反演"><a href="#Mobius反演" class="headerlink" title="Mobius反演"></a>Mobius反演</h2><p>Mobius反演实际上就是按照$\rm Mobius$函数的性质，玄学的推出来式子啦qwq</p>
+<p>假设有数论函数$f,g$满足：</p>
+<p>$$f(n) = \sum_{d|n} g(d)$$</p>
+<p>在狄利克雷卷积的意义下，实际上就是</p>
+<p>$$f = g * 1$$</p>
+<p>那么我们把等式两边同时卷一个$\mu$函数，得到</p>
+<p>$$f * \mu = g * 1 * \mu$$</p>
+<p>也就是：</p>
+<p>$$g = f * \mu$$</p>
+<p>把狄利克雷卷积替换成式子，展开来：</p>
+<p>$$g(n) = \sum_{d|n} \mu(d) f(\frac nd)$$</p>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><h3 id="Sample-Probelm-1"><a href="#Sample-Probelm-1" class="headerlink" title="Sample Probelm #1"></a>Sample Probelm #1</h3><p>我们以一道<a href="https://www.luogu.org/problemnew/show/P5221" target="_blank" rel="noopener">例题</a>为例，来看看Mobius反演应该如何应用.</p>
+<p>题意就是让你求：</p>
+<p>$$\prod_{i=1}^n \prod_{j=1}^n \frac {lcm(i,j)}{\gcd(i,j)}$$</p>
+<p>根据小学奥数内容: $\gcd(i,j) \times lcm(i,j) = i \times j$</p>
+<p>$$\prod_{i=1}^n \prod_{j=1}^n \frac {ij}{\gcd(i,j)^2}$$</p>
+<p>把$\prod$符号移到分数线里面：</p>
+<p>$$\frac {\prod_{i=1}^n \prod_{j=1}^n ij}{\prod_{i=1}^n \prod_{j=1}^n \gcd(i,j)^2}$$</p>
+<p>把分子上的式子拆开就能得到：</p>
+<p>$$\prod_{i=1}^n \prod_{j=1}^n ij = \prod_{i=1}^n (i^n \times n!) = (n!)^{2n}$$</p>
+<p>这个东西非常好求，然后我们来考虑分母。</p>
+<p>先不考虑那个$2$次方，我们看到的是这个式子：</p>
+<p>$$\prod_{i=1}^n \prod_{j=1}^n \gcd(i,j)$$</p>
+<p>我们枚举$gcd(i,j)$的可能性:</p>
+<p>$$\prod_{d=1}^n \prod_{i=1}^n \prod_{j=1}^n [\gcd(i,j) = d]$$</p>
+<p>也就是：</p>
+<p>$$\prod_{d=1}^n d ^ {\sum_{i=1}^n \sum_{j=1}^n [\gcd(i,j) == d]}$$</p>
+<p>然后我们同时除一下$d$</p>
+<p>$$\prod_{d=1}^n d ^ {\sum_{i=1}^{\frac nd} \sum_{j=1}^{\frac nd} [\gcd(i,j) == 1]}$$</p>
+<p>只看指数：</p>
+<p>$$\sum_{i=1}^{\frac nd} \sum_{j=1}^{\frac nd} [\gcd(i,j) == 1]$$</p>
+<p>这不就是<a href="https://www.luogu.org/problemnew/show/P3455" target="_blank" rel="noopener">LuoguP3455 ZAP</a>吗！</p>
+<p>现在我们才开始真正的Mobius反演！</p>
+<p>由Mobius函数的定义式：</p>
+<p>$$\mu * 1 = \varepsilon$$</p>
+<p>我们把$gcd(i,j)$代入可得。</p>
+<p>$$\sum_{d|gcd(i,j)} \mu(d) = [\gcd(i,j) = 1]$$</p>
+<p>所以，原式可以简化为：</p>
+<p>$$\sum_{i=1}^{\frac nd} \sum_{j=1}^{\frac nd} \sum_{k|\gcd(i,j)} \mu(k)$$</p>
+<p>我们变换枚举顺序，首先枚举$d$</p>
+<p>$$\sum_{d=1}^n \sum_{i=1}^{\frac nd} \sum_{j=1}^{\frac nd} [k|\gcd(i,j)] \cdot \mu(k)$$</p>
+<p>同时除一下$k$:</p>
+<p>$$\sum_{d=1}^n \mu(k) \sum_{i=1}^{\frac nd} \sum_{j=1}^{\frac nd} [\gcd(i,j) \in Z]$$</p>
+<p>显然$\gcd(i,j) \in Z$恒成立，于是我们把它去掉。</p>
+<p>$$\sum_{k=1}^{\min(\frac nd,\frac md)} \sum_{i=1}^{\frac {n}{kd}} \sum_{j=1}^{\frac {n}{kd}} \mu(k)$$</p>
+<p>然后根据乘法分配律，得到：</p>
+<p>$$z = \sum_{k=1}^{\frac nd} \mu(k) \lfloor \frac {n^2}{kd}\rfloor$$</p>
+<p>这个东西显然可以数论分块，然后我们把它带回原式计算即可。</p>
+<p>代码就不贴了qwq</p>
+<h3 id="Sample-Problem-2"><a href="#Sample-Problem-2" class="headerlink" title="Sample Problem #2"></a>Sample Problem #2</h3><p>又是一道<a href="https://www.luogu.org/problemnew/show/P2257" target="_blank" rel="noopener">经典题目</a>,请读者自己按照前面的套路思考一下再看下面的题解。</p>
+<hr>
+<p>我们发现，题目其实就是让求这个式子：</p>
+<p>$$\sum_{i=1}^n \sum_{j=1}^m [\gcd(i,j) \in \rm{prime}]$$</p>
+<p>我们枚举$gcd(i,j)$的答案，质数$k$</p>
+<p>$$\sum_{k=1}^{\min(n,m)} \sum_{i=1}^n \sum_{j=1}^m [\gcd(i,j) = k] (k \in \rm{prime})$$</p>
+<p>然后我们同时除一下k，得到：</p>
+<p>$$\sum_{k=1}^{\min(n,m)} \sum_{i=1}^{\frac nk} \sum_{j=1}^{\frac mk} [\gcd(i,j) = 1] (k \in \rm{prime})$$</p>
+<p>开始<del>喜闻乐见</del>的Mobius反演：</p>
+<p>$$\sum_{k=1}^{\min(n,m)} \sum_{i=1}^{\frac nk} \sum_{j=1}^{\frac mk} \sum_{d|\gcd(i,j)} \mu(d)$$</p>
+<p>变换枚举顺序：</p>
+<p>$$\sum_{d=1}^{\min(n,m)} \sum_{k=1}^{\min(n,m)} \sum_{i=1}^{\frac nk} \sum_{j=1}^{\frac mk} [d|\gcd(i,j)] \cdot \mu(d)$$</p>
+<p>然后我们同时除一下$d$:</p>
+<p>$$\sum_{d=1}^{\min(n,m)} \sum_{k=1}^{\min(n,m)} \sum_{i=1}^{\frac {n}{kd}} \sum_{j=1}^{\frac {m}{kd}} [\gcd(i,j) \in Z] \cdot \mu(d)$$</p>
+<p>显然，原式可以简化为：</p>
+<p>$$\sum_{d=1}^{\lfloor \frac nk \rfloor} \sum_{k=1}^{n} \lfloor \frac {n}{kd}\rfloor \lfloor \frac {m}{kd}\rfloor \mu(d)$$</p>
+<p>然后我们设$T = kd$,代入得：</p>
+<p>$$\sum_{d=1}^{\lfloor \frac nk \rfloor} \sum_{k=1}^{n} \lfloor \frac {n}{T}\rfloor \lfloor \frac {m}{T}\rfloor \mu(d)$$</p>
+<p>然后我们枚举一下$T$,并把它挪到前面去：</p>
+<p>$$\sum_{T=1}^n \lfloor \frac {n}{T}\rfloor \lfloor \frac {m}{T}\rfloor \sum_{k|T,k \in prime} \mu \left( \frac Tk \right)$$</p>
+<p>然后我们预处理一下后面的东西，最后数论分块一下，就解决问题了qwq</p>
+<h4 id="本题代码"><a href="#本题代码" class="headerlink" title="本题代码"></a>本题代码</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Headers */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;climits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FOR(i,a,b,c) for(int i=(a);i&lt;=(b);i+=(c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ROF(i,a,b,c) for(int i=(a);i&gt;=(b);i-=(c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FORL(i,a,b,c) for(long long i=(a);i&lt;=(b);i+=(c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ROFL(i,a,b,c) for(long long i=(a);i&gt;=(b);i-=(c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FORR(i,a,b,c) for(register int i=(a);i&lt;=(b);i+=(c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ROFR(i,a,b,c) for(register int i=(a);i&gt;=(b);i-=(c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) x&amp;(-x)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LeftChild(x) x&lt;&lt;1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RightChild(x) (x&lt;&lt;1)+1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RevEdge(x) x^1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FILE_IN(x) freopen(x,<span class="meta-string">"r"</span>,stdin);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FILE_OUT(x) freopen(x,<span class="meta-string">"w"</span>,stdout);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLOSE_IN() fclose(stdin);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLOSE_OUT() fclose(stdout);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IOS(x) std::ios::sync_with_stdio(x)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Dividing() printf(<span class="meta-string">"-----------------------------------\n"</span>);</span></span><br><span class="line"><span class="keyword">namespace</span> FastIO&#123;</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> BUFSIZE = <span class="number">1</span> &lt;&lt; <span class="number">20</span>;</span><br><span class="line">    <span class="keyword">char</span> ibuf[BUFSIZE],*is = ibuf,*its = ibuf;</span><br><span class="line">    <span class="keyword">char</span> obuf[BUFSIZE],*os = obuf,*ot = obuf + BUFSIZE;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">char</span> <span class="title">getch</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(is == its)</span><br><span class="line">            its = (is = ibuf)+fread(ibuf,<span class="number">1</span>,BUFSIZE,<span class="built_in">stdin</span>);</span><br><span class="line">        <span class="keyword">return</span> (is == its)?EOF:*is++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">getint</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>,neg = <span class="number">0</span>,ch = getch();</span><br><span class="line">        <span class="keyword">while</span>(!(<span class="built_in">isdigit</span>(ch) || ch == <span class="string">'-'</span>) &amp;&amp; ch != EOF)</span><br><span class="line">            ch = getch();</span><br><span class="line">        <span class="keyword">if</span>(ch == <span class="string">'-'</span>)&#123;</span><br><span class="line">            neg = <span class="number">1</span>;ch = getch();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">isdigit</span>(ch))&#123;</span><br><span class="line">            res = (res &lt;&lt; <span class="number">3</span>) + (res &lt;&lt; <span class="number">1</span>)+ (ch - <span class="string">'0'</span>);</span><br><span class="line">            ch = getch();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> neg?-res:res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">flush</span><span class="params">()</span></span>&#123;</span><br><span class="line">        fwrite(obuf,<span class="number">1</span>,os-obuf,<span class="built_in">stdout</span>);</span><br><span class="line">        os = obuf;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">putch</span><span class="params">(<span class="keyword">char</span> ch)</span></span>&#123;</span><br><span class="line">        *os++ = ch;</span><br><span class="line">        <span class="keyword">if</span>(os == ot)	flush();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">putint</span><span class="params">(<span class="keyword">int</span> res)</span></span>&#123;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">char</span> q[<span class="number">10</span>];</span><br><span class="line">        <span class="keyword">if</span>(res==<span class="number">0</span>)	putch(<span class="string">'0'</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(res &lt; <span class="number">0</span>)&#123;putch(<span class="string">'-'</span>);res = -res;&#125;</span><br><span class="line">        <span class="keyword">int</span> top = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(res)&#123;</span><br><span class="line">            q[top++] = res % <span class="number">10</span> + <span class="string">'0'</span>;</span><br><span class="line">            res /= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(top--)	putch(q[top]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">space</span><span class="params">(<span class="keyword">bool</span> x)</span></span>&#123;</span><br><span class="line">    	<span class="keyword">if</span>(!x) putch(<span class="string">'\n'</span>);</span><br><span class="line">    	<span class="keyword">else</span> putch(<span class="string">' '</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">read</span><span class="params">(<span class="keyword">int</span> &amp;x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> rt = FastIO::getint();</span><br><span class="line">    x = rt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">bool</span> enter)</span></span>&#123;</span><br><span class="line">    FastIO::putint(x);</span><br><span class="line">    FastIO::flush();</span><br><span class="line">    FastIO::space(enter);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* definitions */</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">1e7</span> + <span class="number">2</span>;</span><br><span class="line"><span class="keyword">int</span> T,n,m,prime[MAXN],cnt,sum[MAXN],dp[MAXN];</span><br><span class="line"><span class="keyword">bool</span> isprime[MAXN];</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> u[MAXN];</span><br><span class="line"><span class="comment">/* functions */</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span>&#123;</span><br><span class="line">    u[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    FOR(i,<span class="number">2</span>,MAXN,<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(!isprime[i]) u[i] = <span class="number">-1</span>, prime[++cnt] = i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j &lt;= cnt &amp;&amp; i * prime[j] &lt;= MAXN; j++)&#123;</span><br><span class="line">            isprime[i * prime[j]] = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">if</span>(i % prime[j] == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">            u[i * prime[j]] = -u[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    FOR(i,<span class="number">1</span>,cnt,<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j * prime[i] &lt;= MAXN;j++) dp[j * prime[i]] += u[j];</span><br><span class="line">    &#125;</span><br><span class="line">    FOR(i,<span class="number">1</span>,MAXN,<span class="number">1</span>) sum[i] = sum[i<span class="number">-1</span>] + dp[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n,<span class="keyword">int</span> m)</span></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(n &gt; m) <span class="built_in">std</span>::swap(n,m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>,j = <span class="number">0</span>; i &lt;= n;i = j + <span class="number">1</span>)&#123;</span><br><span class="line">        j = <span class="built_in">std</span>::min(n/(n/i),m/(m/i));</span><br><span class="line">        ans += (<span class="keyword">long</span> <span class="keyword">long</span>)(sum[j] - sum[i<span class="number">-1</span>]) * (<span class="keyword">long</span> <span class="keyword">long</span>)(n / i) * (<span class="keyword">long</span> <span class="keyword">long</span>)(m / i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> *Argv[])</span></span>&#123;</span><br><span class="line">    init();</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span>(T--)&#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line">        <span class="keyword">if</span>(n &gt; m) <span class="built_in">std</span>::swap(n,m);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,solve(n,m));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li><p>Mobius反演并不是多么难的算法，它更像是一种技巧，可以帮助你更方便的计算出式子</p>
+</li>
+<li><p>对于布尔一类的求和一般考虑用$\mu * 1 = \varepsilon$来解决</p>
+</li>
+<li><p>对于直接贡献的可以考虑变换枚举顺序使它变成系数。</p>
+</li>
+<li><p>要学会灵活的变换枚举的顺序和内容</p>
+</li>
+<li><p>利用积性函数的性质来用线性筛预处理，范围较大可以考虑杜教筛</p>
+</li>
+</ul>
+<h1 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h1>
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+          
+            <a href="/tags/%E6%95%B0%E5%AD%A6-%E6%95%B0%E8%AE%BA/" rel="tag"># 数学/数论</a>
+          
+            <a href="/tags/Mobius%E5%8F%8D%E6%BC%94/" rel="tag"># Mobius反演</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/12/LuoguP2480/" rel="next" title="LuoguP2480「SDOI2010」题解">
+                <i class="fa fa-chevron-left"></i> LuoguP2480「SDOI2010」题解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/15/RolleTheorme/" rel="prev" title="微分中值定理学习笔记">
+                微分中值定理学习笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/qwqwq.jpg"
+                alt="Cotoliqwq"/>
+            
+              <p class="site-author-name" itemprop="name">Cotoliqwq</p>
+              <div class="site-description motion-element" itemprop="description">我们称之为路的，其实不过是彷徨。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">77</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Herself32" title="GitHub &rarr; https://github.com/Herself32" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/Herself32@outlook.com" title="E-Mail &rarr; Herself32@outlook.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">1.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前置知识和技巧"><span class="nav-number">3.</span> <span class="nav-text">前置知识和技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数论函数"><span class="nav-number">3.1.</span> <span class="nav-text">数论函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#积性函数"><span class="nav-number">3.2.</span> <span class="nav-text">积性函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#狄利克雷卷积"><span class="nav-number">3.3.</span> <span class="nav-text">狄利克雷卷积</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#性质"><span class="nav-number">3.3.1.</span> <span class="nav-text">性质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单位元"><span class="nav-number">3.3.2.</span> <span class="nav-text">单位元</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入"><span class="nav-number">4.</span> <span class="nav-text">引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mobius函数"><span class="nav-number">5.</span> <span class="nav-text">Mobius函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mobius反演"><span class="nav-number">6.</span> <span class="nav-text">Mobius反演</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例题"><span class="nav-number">7.</span> <span class="nav-text">例题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sample-Probelm-1"><span class="nav-number">7.1.</span> <span class="nav-text">Sample Probelm #1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sample-Problem-2"><span class="nav-number">7.2.</span> <span class="nav-text">Sample Problem #2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#本题代码"><span class="nav-number">7.2.1.</span> <span class="nav-text">本题代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#THE-END"><span class="nav-number"></span> <span class="nav-text">THE END</span></a></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cotoliqwq</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  <script>
+    ;((d, w) => {
+      loadThree = () => {
+        let s = d.createElement('script');
+        s.src = '/lib/three/three.min.js';
+        d.body.appendChild(s);
+      }
+      let styles = ['', '', ''];
+      loadStyle = () => {
+        styles.forEach(x => {
+          if (x !== '') {
+            let s = d.createElement('script');
+            s.src = x;
+            d.body.appendChild(s);
+          }
+        })
+      }
+      w.addEventListener('DOMContentLoaded', loadThree);
+      w.addEventListener('load', loadStyle);
+    })(document, window);
+  </script>
+
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
