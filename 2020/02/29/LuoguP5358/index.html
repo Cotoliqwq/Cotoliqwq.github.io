@@ -90,15 +90,15 @@
 
 
 
-  <meta name="description" content="我是鸽子&#x2F;cy">
+  <meta name="description" content="我是鸽子&#x2F;cy  Description维护一个长度为 $n$ 的序列$a_n$，$q$次操作. 要求支持单点赋值、整体赋值、整体加、整体乘、单点查询和整体求和。 $n \leq 10^9, q \leq 10^5, 0 \leq a_i \leq 10^9$.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LuoguP5358「SDOI2019」题解">
 <meta property="og:url" content="http://yoursite.com/2020/02/29/LuoguP5358/index.html">
 <meta property="og:site_name" content="Cotoliqwq&#39;s Blog">
-<meta property="og:description" content="我是鸽子&#x2F;cy">
+<meta property="og:description" content="我是鸽子&#x2F;cy  Description维护一个长度为 $n$ 的序列$a_n$，$q$次操作. 要求支持单点赋值、整体赋值、整体加、整体乘、单点查询和整体求和。 $n \leq 10^9, q \leq 10^5, 0 \leq a_i \leq 10^9$.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-02-29T10:32:27.000Z">
-<meta property="article:modified_time" content="2020-03-03T09:15:38.643Z">
+<meta property="article:modified_time" content="2020-04-15T10:42:31.637Z">
 <meta property="article:author" content="Cotoliqwq">
 <meta property="article:tag" content="Solutions">
 <meta property="article:tag" content="SDOI">
@@ -405,7 +405,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-03-03 17:15:38" itemprop="dateModified" datetime="2020-03-03T17:15:38+08:00">2020-03-03</time>
+                <time title="修改时间：2020-04-15 18:42:31" itemprop="dateModified" datetime="2020-04-15T18:42:31+08:00">2020-04-15</time>
               </span>
             
           
@@ -447,23 +447,15 @@
         <blockquote>
 <p>我是鸽子/cy</p>
 </blockquote>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>维护一个长度为 $n$ 的序列$a_n$，$q$次操作.</p>
+<p>要求支持单点赋值、整体赋值、整体加、整体乘、单点查询和整体求和。</p>
+<p>$n \leq 10^9, q \leq 10^5, 0 \leq a_i \leq 10^9$.</p>
 <a id="more"></a>
-
-<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>给定一个长度为$n$的整数数列，里面的元素依次编号为 $a_1,a_2,a_3,\dots,a_n$ .初始的时候，所有元素都为零。现在按照时间顺序提供了若干次关于这个数列的修改或询问，每一次修改或询问一定为以下六种情况之一：</p>
-<ul>
-<li>$\rm 1 \text{ }i \text{ }val$ : 将$a_i$赋值为给定整数$\rm val$.</li>
-<li>$\rm 2 \text{ }val$ : 将所有元素同时加上$\rm val$.</li>
-<li>$\rm 3 \text{ }val$ : 将所有元素同时乘上 $\rm val$.</li>
-<li>$\rm 4 \text{ }val$ : 将所有元素同时赋值为 $\rm val$.</li>
-<li>$\rm 5 \text{ }i$ : 询问第$\rm i$个元素 $a_i$​ 现在的值是多少.</li>
-<li>$\rm 6$ : 询问现在所有元素的和.</li>
-</ul>
 <h3 id="Samples"><a href="#Samples" class="headerlink" title="Samples"></a>Samples</h3><h4 id="Input-1"><a href="#Input-1" class="headerlink" title="Input #1"></a>Input #1</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">7</span><br><span class="line">28</span><br><span class="line">6</span><br><span class="line">4 -192321079</span><br><span class="line">3 418379342</span><br><span class="line">1 3 189801569</span><br><span class="line">3 -840249197</span><br><span class="line">4 -751917965</span><br><span class="line">3 649799919</span><br><span class="line">1 5 -92666141</span><br><span class="line">6</span><br><span class="line">4 451258008</span><br><span class="line">5 1</span><br><span class="line">4 696880327</span><br><span class="line">3 772574465</span><br><span class="line">6</span><br><span class="line">4 301010289</span><br><span class="line">3 480168068</span><br><span class="line">5 3</span><br><span class="line">5 2</span><br><span class="line">4 840536237</span><br><span class="line">5 5</span><br><span class="line">5 4</span><br><span class="line">1 7 -792284106</span><br><span class="line">2 604521872</span><br><span class="line">3 966540578</span><br><span class="line">2 -381646699</span><br><span class="line">3 -939378260</span><br><span class="line">2 -20129935</span><br><span class="line">6</span><br><span class="line">2</span><br><span class="line">0 1</span><br><span class="line">197 199</span><br></pre></td></tr></table></figure>
 <h4 id="Output-1"><a href="#Output-1" class="headerlink" title="Output #1"></a>Output #1</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2816930</span><br></pre></td></tr></table></figure>
 
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>简单概括一下题意就是: 维护一个长度为 $n$ 的序列，要求支持单点赋值、整体赋值、整体加、整体乘、单点查询和整体求和。</p>
-<p>序列长度极大，有$10^9$, 要求执行操作复杂度$\mathcal O(1)$.</p>
-<p>显然$\rm Subtask 1$直接随便拿一个平衡树就好了。</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>$\rm Subtask 1$直接随便拿一个平衡树就好了。</p>
+<p>全部数据的话，序列长度极大，有$10^9$, 显然要求执行操作复杂度$\mathcal O(1)$.</p>
 <p>注意到本质不同的操作只有$10^5$个，那么可以把涉及的编号拿出来离散化一下即可。</p>
 <p>因为所有的区间操作全部是针对整个数列的，考虑类似于分块打标记的方式，我们维护四个标记：</p>
 <ul>
