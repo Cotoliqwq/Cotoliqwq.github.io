@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: true,
+    back2top_sidebar: true,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <meta name="description" content="人生第一道24题，纪念一下qaq  Description给定一张半完全有向二分图(每个左边节点都有边指向每个右边节点)，左右两边节点数分别为$m,n$. 左边节点$i$有货物$a_i$, 右边节点$j$有需求$b_j$, 满足供需平衡$\sum a_i &#x3D; \sum b_j$. 对于一条从$i$指向$j$的边，其费用为$cost_{i,j}$. 求让右边所有需求被满足的方案的最小费用. $1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LuoguP4015「网络流24题」题解">
+<meta property="og:url" content="http://yoursite.com/2020/04/24/LuoguP4015/index.html">
+<meta property="og:site_name" content="Cotoliqwq&#39;s Blog">
+<meta property="og:description" content="人生第一道24题，纪念一下qaq  Description给定一张半完全有向二分图(每个左边节点都有边指向每个右边节点)，左右两边节点数分别为$m,n$. 左边节点$i$有货物$a_i$, 右边节点$j$有需求$b_j$, 满足供需平衡$\sum a_i &#x3D; \sum b_j$. 对于一条从$i$指向$j$的边，其费用为$cost_{i,j}$. 求让右边所有需求被满足的方案的最小费用. $1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-24T07:42:19.000Z">
+<meta property="article:modified_time" content="2020-04-24T08:18:04.287Z">
+<meta property="article:author" content="Cotoliqwq">
+<meta property="article:tag" content="Solutions">
+<meta property="article:tag" content="网络流24题">
+<meta property="article:tag" content="费用流">
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2020/04/24/LuoguP4015/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>LuoguP4015「网络流24题」题解 | Cotoliqwq's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cotoliqwq's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">呜咽, 在风中作陪</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-友链">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/links/" rel="section"><i class="menu-item-icon fa fa-fw fa-link"></i> <br/>友链</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-模板">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/templates/" rel="section"><i class="menu-item-icon fa fa-fw fa-code"></i> <br/>模板</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/24/LuoguP4015/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cotoliqwq"/>
+      <meta itemprop="description" content="我们称之为路的，其实不过是彷徨。"/>
+      <meta itemprop="image" content="/images/qwqwq.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cotoliqwq's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">LuoguP4015「网络流24题」题解
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-04-24 15:42:19 / 修改时间：16:18:04" itemprop="dateCreated datePublished" datetime="2020-04-24T15:42:19+08:00">2020-04-24</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br/>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>人生第一道24题，纪念一下qaq</p>
+</blockquote>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>给定一张半完全有向二分图(每个左边节点都有边指向每个右边节点)，左右两边节点数分别为$m,n$.</p>
+<p>左边节点$i$有货物$a_i$, 右边节点$j$有需求$b_j$, 满足供需平衡$\sum a_i = \sum b_j$.</p>
+<p>对于一条从$i$指向$j$的边，其费用为$cost_{i,j}$. 求让右边所有需求被满足的方案的最小费用.</p>
+<p>$1 \leq n,m \leq 100$.</p>
+<a id="more"></a>
+
+<h3 id="Samples"><a href="#Samples" class="headerlink" title="Samples"></a>Samples</h3><h4 id="Sample-Input-1"><a href="#Sample-Input-1" class="headerlink" title="Sample Input #1"></a>Sample Input #1</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">2 3</span><br><span class="line">220 280</span><br><span class="line">170 120 210</span><br><span class="line">77 39 105</span><br><span class="line">150 186 122</span><br></pre></td></tr></table></figure>
+
+<h4 id="Sample-Output-1"><a href="#Sample-Output-1" class="headerlink" title="Sample Output #1"></a>Sample Output #1</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">48500</span><br><span class="line">69140</span><br></pre></td></tr></table></figure>
+
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>首先膜拜$\texttt {Network Flow Master}$ xht, 神仙10min爆切NOI网络流题太强大了。</p>
+<hr>
+<p>明显抽象成图之后这种有限制的最短路可以用网络流来解决。</p>
+<p>因为有多个起点，那么考虑建立超级源点，超级汇点。</p>
+<p>然后把超源和左边连上流量为$a_i$, 费用为$0$的边，超汇和右边连上流量为$b_i$, 费用为$0$的边。</p>
+<p>最后$n^2$的把原二分图的每条边连好，流量为$inf$, 费用为$cost_{i,j}$.</p>
+<p>结果跑个费用流就完事了，最大费用就建负费用图再跑一遍（（（（</p>
+<h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Headers */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;climits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cctype&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FOR(i,a,b,c) for(int i=(a);i&lt;=(b);i+=(c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ROF(i,a,b,c) for(int i=(a);i&gt;=(b);i-=(c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FORL(i,a,b,c) for(long long i=(a);i&lt;=(b);i+=(c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ROFL(i,a,b,c) for(long long i=(a);i&gt;=(b);i-=(c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FORR(i,a,b,c) for(register int i=(a);i&lt;=(b);i+=(c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ROFR(i,a,b,c) for(register int i=(a);i&gt;=(b);i-=(c))</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RevEdge(x) x^1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) x&amp;(-x)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LeftChild(x) x&lt;&lt;1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> RightChild(x) (x&lt;&lt;1)+1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLOSE_IN() fclose(stdin);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CLOSE_OUT() fclose(stdout);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FILE_IN(x) freopen(x,<span class="meta-string">"r"</span>,stdin);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FILE_OUT(x) freopen(x,<span class="meta-string">"w"</span>,stdout);</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IOS(x) std::ios::sync_with_stdio(x)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> Dividing() printf(<span class="meta-string">"-----------------------------------\n"</span>);</span></span><br><span class="line"><span class="keyword">namespace</span> FastIO &#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> gc() (iS == iT ? (iT = (iS = ibuff) + fread(ibuff, 1, SIZ, stdin), (iS == iT ? EOF : *iS++)) : *iS++)</span></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> SIZ = <span class="number">1</span> &lt;&lt; <span class="number">21</span> | <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">char</span>* iS, * iT, ibuff[SIZ], obuff[SIZ], * oS = obuff, * oT = oS + SIZ - <span class="number">1</span>, fu[<span class="number">110</span>], cc;</span><br><span class="line">    <span class="keyword">int</span> fr;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">out</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        fwrite(obuff, <span class="number">1</span>, oS - obuff, <span class="built_in">stdout</span>);</span><br><span class="line">        oS = obuff;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">Type</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">inline</span> <span class="title">void</span> <span class="title">read</span>(<span class="title">Type</span>&amp; <span class="title">x</span>) &#123;</span></span><br><span class="line">        x = <span class="number">0</span>;</span><br><span class="line">        Type y = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (cc = gc(); (cc &gt; <span class="string">'9'</span> || cc &lt; <span class="string">'0'</span>) &amp;&amp; cc != <span class="string">'-'</span>; cc = gc());</span><br><span class="line">        cc == <span class="string">'-'</span> ? y = <span class="number">-1</span> : x = (cc &amp; <span class="number">15</span>);</span><br><span class="line">        <span class="keyword">for</span> (cc = gc(); cc &gt;= <span class="string">'0'</span> &amp;&amp; cc &lt;= <span class="string">'9'</span>; cc = gc())</span><br><span class="line">            x = x * <span class="number">10</span> + (cc &amp; <span class="number">15</span>);</span><br><span class="line">        x *= y;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">Type</span>&gt;</span></span><br><span class="line"><span class="class">    <span class="title">inline</span> <span class="title">void</span> <span class="title">print</span>(<span class="title">Type</span> <span class="title">x</span>, <span class="title">char</span> <span class="title">text</span> = '\<span class="title">n</span>') &#123;</span></span><br><span class="line">        <span class="keyword">if</span> (x &lt; <span class="number">0</span>)</span><br><span class="line">            * oS++ = <span class="string">'-'</span>, x *= <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">if</span> (x == <span class="number">0</span>)</span><br><span class="line">            * oS++ = <span class="string">'0'</span>;</span><br><span class="line">        <span class="keyword">while</span> (x)</span><br><span class="line">            fu[++fr] = x % <span class="number">10</span> + <span class="string">'0'</span>, x /= <span class="number">10</span>;</span><br><span class="line">        <span class="keyword">while</span> (fr)</span><br><span class="line">            * oS++ = fu[fr--];</span><br><span class="line">        * oS++ = text;</span><br><span class="line">        out();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">prints</span><span class="params">(<span class="keyword">char</span> x[], <span class="keyword">char</span> text = <span class="string">'\n'</span>)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">0</span>; x[i]; ++i)</span><br><span class="line">            * oS++ = x[i];</span><br><span class="line">        * oS++ = text;</span><br><span class="line">        out();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> FastIO;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> T <span class="title">max</span><span class="params">(T a, T b)</span> </span>&#123;<span class="keyword">return</span> (a &gt; b) ? a : b;&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> T <span class="title">min</span><span class="params">(T a, T b)</span> </span>&#123;<span class="keyword">return</span> (a &gt; b) ? b : a;&#125;</span><br><span class="line"><span class="comment">/* definitions */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">2e2</span> + <span class="number">10</span>, MAXM = <span class="number">2e4</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf = <span class="number">0x7f7f7f7f</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> &#123;</span><span class="keyword">int</span> next, to, wgh, cst;&#125; Graph[MAXM];</span><br><span class="line"><span class="keyword">int</span> n, m, s, t, dist[MAXN], cur[MAXN], head[MAXN], cnt = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> a[MAXN], b[MAXN], cost[MAXN][MAXN];</span><br><span class="line"><span class="keyword">bool</span> visited[MAXN];</span><br><span class="line"><span class="comment">/* functions */</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Add_Edge</span><span class="params">(<span class="keyword">int</span> from, <span class="keyword">int</span> to, <span class="keyword">int</span> wgh, <span class="keyword">int</span> cst)</span> </span>&#123;</span><br><span class="line">    Graph[++cnt] = (Edge) &#123;head[from], to, wgh, cst&#125;;</span><br><span class="line">    Graph[++cnt] = (Edge) &#123;head[to], from, <span class="number">0</span>, -cst&#125;;</span><br><span class="line">    head[from] = cnt - <span class="number">1</span>; head[to] = cnt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">CLEAR</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(dist, <span class="number">0</span>, <span class="keyword">sizeof</span> dist);</span><br><span class="line">    <span class="built_in">memset</span>(cur, <span class="number">0</span>, <span class="keyword">sizeof</span> cur);</span><br><span class="line">    <span class="built_in">memset</span>(head, <span class="number">0</span>, <span class="keyword">sizeof</span> head);</span><br><span class="line">    <span class="built_in">memset</span>(visited, <span class="number">0</span>, <span class="keyword">sizeof</span> visited);</span><br><span class="line">    <span class="built_in">memset</span>(Graph, <span class="number">0</span>, <span class="keyword">sizeof</span> Graph); cnt = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">namespace</span> DINIC &#123;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">SPFA</span><span class="params">(<span class="keyword">int</span> s, <span class="keyword">int</span> t)</span> </span>&#123;</span><br><span class="line">        <span class="built_in">memset</span>(dist, <span class="number">0x7f</span>, <span class="keyword">sizeof</span> dist);</span><br><span class="line">        <span class="built_in">memcpy</span>(cur, head, <span class="keyword">sizeof</span> head); <span class="built_in">std</span>::<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; Q;</span><br><span class="line">        Q.push(s); dist[s] = <span class="number">0</span>; visited[s] = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">while</span>(!Q.empty()) &#123;</span><br><span class="line">            <span class="keyword">int</span> u = Q.front(); Q.pop(); visited[u] = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = head[u]; i; i = Graph[i].next) &#123;</span><br><span class="line">                <span class="keyword">int</span> v = Graph[i].to, w = Graph[i].cst;</span><br><span class="line">                <span class="keyword">if</span>(Graph[i].wgh &amp;&amp; dist[v] &gt; dist[u] + w) &#123;</span><br><span class="line">                    dist[v] = dist[u] + w;</span><br><span class="line">                    <span class="keyword">if</span>(!visited[v]) Q.push(v), visited[v] = <span class="literal">true</span>;</span><br><span class="line">                 &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">return</span> dist[t] &lt; inf;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">DFS</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> t, <span class="keyword">int</span> Maxflow)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(u == t) <span class="keyword">return</span> Maxflow;</span><br><span class="line">        visited[u] = <span class="literal">true</span>; <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> &amp;i = cur[u]; i &amp;&amp; res &lt; Maxflow; i = Graph[i].next) &#123;</span><br><span class="line">            <span class="keyword">int</span> v = Graph[i].to, w = Graph[i].cst;</span><br><span class="line">            <span class="keyword">if</span>(Graph[i].wgh &amp;&amp; !visited[v] &amp;&amp; dist[v] == dist[u] + w) &#123;</span><br><span class="line">                <span class="keyword">int</span> flow = DFS(v, t, min(Graph[i].wgh, Maxflow));</span><br><span class="line">                <span class="keyword">if</span>(flow) &#123;</span><br><span class="line">                    Graph[i].wgh -= flow; Graph[i ^ <span class="number">1</span>].wgh += flow;</span><br><span class="line">                    Maxflow -= flow; res += flow;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; visited[u] = <span class="literal">false</span>; <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> ll <span class="title">dinic</span><span class="params">(<span class="keyword">int</span> s, <span class="keyword">int</span> t)</span> </span>&#123;</span><br><span class="line">        ll res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(SPFA(s, t)) &#123;</span><br><span class="line">            ll flow;</span><br><span class="line">            <span class="keyword">while</span>((flow = DFS(s, t, inf))) res += <span class="number">1l</span>l * flow * dist[t];</span><br><span class="line">        &#125; <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*FILE_IN("data.in");*/</span> read(m); read(n); t = m + n + <span class="number">1</span>;</span><br><span class="line">    FOR(i, <span class="number">1</span>, m, <span class="number">1</span>) read(a[i]); FOR(i, <span class="number">1</span>, n, <span class="number">1</span>) read(b[i]);</span><br><span class="line">    FOR(i, <span class="number">1</span>, m, <span class="number">1</span>) FOR(j, <span class="number">1</span>, n, <span class="number">1</span>) read(cost[i][j]);</span><br><span class="line">    FOR(i, <span class="number">1</span>, m, <span class="number">1</span>) Add_Edge(s, i, a[i], <span class="number">0</span>);</span><br><span class="line">    FOR(i, <span class="number">1</span>, n, <span class="number">1</span>) Add_Edge(m + i, t, b[i], <span class="number">0</span>);</span><br><span class="line">    FOR(i, <span class="number">1</span>, m, <span class="number">1</span>) FOR(j, <span class="number">1</span>, n, <span class="number">1</span>) Add_Edge(i, m + j, inf, cost[i][j]);</span><br><span class="line">    ll mincost = DINIC::dinic(s, t); CLEAR();</span><br><span class="line">    FOR(i, <span class="number">1</span>, m, <span class="number">1</span>) Add_Edge(s, i, a[i], <span class="number">0</span>);</span><br><span class="line">    FOR(i, <span class="number">1</span>, n, <span class="number">1</span>) Add_Edge(m + i, t, b[i], <span class="number">0</span>);</span><br><span class="line">    FOR(i, <span class="number">1</span>, m, <span class="number">1</span>) FOR(j, <span class="number">1</span>, n, <span class="number">1</span>) Add_Edge(i, m + j, inf, -cost[i][j]);</span><br><span class="line">    ll maxcost = DINIC::dinic(s, t);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n%lld"</span>, mincost, -maxcost);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="THE-END"><a href="#THE-END" class="headerlink" title="THE END"></a>THE END</h1>
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Solutions/" rel="tag"># Solutions</a>
+          
+            <a href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%8124%E9%A2%98/" rel="tag"># 网络流24题</a>
+          
+            <a href="/tags/%E8%B4%B9%E7%94%A8%E6%B5%81/" rel="tag"># 费用流</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/13/LuoguP3338/" rel="next" title="LuoguP3338「ZJOI2014」题解">
+                <i class="fa fa-chevron-left"></i> LuoguP3338「ZJOI2014」题解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/qwqwq.jpg"
+                alt="Cotoliqwq"/>
+            
+              <p class="site-author-name" itemprop="name">Cotoliqwq</p>
+              <div class="site-description motion-element" itemprop="description">我们称之为路的，其实不过是彷徨。</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/%20%7C%7C%20archive">
+                
+                    <span class="site-state-item-count">61</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/%20%7C%7C%20tags">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">79</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Herself32" title="GitHub &rarr; https://github.com/Herself32" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/Herself32@outlook.com" title="E-Mail &rarr; Herself32@outlook.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Samples"><span class="nav-number">2.</span> <span class="nav-text">Samples</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Sample-Input-1"><span class="nav-number">2.1.</span> <span class="nav-text">Sample Input #1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sample-Output-1"><span class="nav-number">2.2.</span> <span class="nav-text">Sample Output #1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">3.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#THE-END"><span class="nav-number"></span> <span class="nav-text">THE END</span></a></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cotoliqwq</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+  
+  
+
+  
+
+  
+
+  
+
+  <script>
+    ;((d, w) => {
+      loadThree = () => {
+        let s = d.createElement('script');
+        s.src = '/lib/three/three.min.js';
+        d.body.appendChild(s);
+      }
+      let styles = ['', '', ''];
+      loadStyle = () => {
+        styles.forEach(x => {
+          if (x !== '') {
+            let s = d.createElement('script');
+            s.src = x;
+            d.body.appendChild(s);
+          }
+        })
+      }
+      w.addEventListener('DOMContentLoaded', loadThree);
+      w.addEventListener('load', loadStyle);
+    })(document, window);
+  </script>
+
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
